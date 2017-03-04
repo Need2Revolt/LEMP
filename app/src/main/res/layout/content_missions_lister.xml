@@ -20,6 +20,5 @@
         android:id="@+id/missionsListView"
         android:headerDividersEnabled="true"
         android:footerDividersEnabled="true"
-        android:background="?attr/colorPrimary"
         style="@style/Widget.AppCompat.ListView" />
 </RelativeLayout>

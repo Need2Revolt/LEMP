@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import net.octopusstudios.carnospace.lemp.adapters.MissionsAdapter;
+import net.octopusstudios.carnospace.lemp.listener.AddMissionListener;
 import net.octopusstudios.carnospace.lemp.pojo.Mission;
 
 import java.util.ArrayList;
@@ -42,8 +43,7 @@ public class MissionsListerActivity extends AppCompatActivity {
         missionsList.setAdapter(missionsAdapter);
 
         final Context ctx = this;
-        //TODO restore this
-        //fab.setOnClickListener(new AddMissionListener(ctx, missions, missionsAdapter));
+        fab.setOnClickListener(new AddMissionListener(ctx, missions, missionsAdapter));
 
         //experimental
         missionsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
