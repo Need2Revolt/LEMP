@@ -14,9 +14,11 @@
     tools:context="net.octopusstudios.carnospace.lemp.MissionsListerActivity"
     tools:showIn="@layout/activity_missions_lister">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:background="?attr/colorPrimary" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/missionsListView"
+        android:headerDividersEnabled="true"
+        android:footerDividersEnabled="true"
+        style="@style/Widget.AppCompat.ListView" />
 </RelativeLayout>
