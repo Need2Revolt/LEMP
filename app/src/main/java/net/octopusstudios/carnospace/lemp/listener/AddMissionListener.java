@@ -1,3 +1,8 @@
+/**
+ * This code is part of "LEMP: Leaving Earth Mission Planner" android application.
+ * Release under GPL v3
+ * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
+ */
 package net.octopusstudios.carnospace.lemp.listener;
 
 import android.app.AlertDialog;
