@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import net.octopusstudios.carnospace.lemp.R;
@@ -52,29 +52,31 @@ public class MissionDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //TODO change to actual mission details input
                 LayoutInflater li = LayoutInflater.from(ctx);
-                View promptsView = li.inflate(R.layout.payload_input_dialog, null);
-                final TextView stageNameEdit = (TextView) promptsView.findViewById(R.id.payloadNameText);
-                final Spinner difficultySpinner = (Spinner)promptsView.findViewById(R.id.maneuverDifficultySpinner);
-                final Spinner payloadMassSpinner = (Spinner)promptsView.findViewById(R.id.payloadMassSpinner);
+                View stageInputView = li.inflate(R.layout.payload_input_dialog, null);
+                final TextView stageNameEdit = (TextView) stageInputView.findViewById(R.id.payloadNameText);
+                final NumberPicker maneuverDifficultyPicker = (NumberPicker)stageInputView.findViewById(R.id.maneuverDifficultyPicker);
+                maneuverDifficultyPicker.setMinValue(0);
+                maneuverDifficultyPicker.setMaxValue(5); //TODO put this in a constant or something
+                final NumberPicker payloadMassPicker = (NumberPicker)stageInputView.findViewById(R.id.payloadMassPicker);
+                payloadMassPicker.setMinValue(0);
+                payloadMassPicker.setMaxValue(20); //TODO put this in a constant or something
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        ctx);
+                AlertDialog.Builder inputDialogBuilder = new AlertDialog.Builder(ctx);
 
-                // set prompts.xml to alertdialog builder
-                alertDialogBuilder.setView(promptsView);
+                // set payload_input_dialog.xml to input dialog builder
+                inputDialogBuilder.setView(stageInputView);
 
                 // set dialog message
-                alertDialogBuilder
+                inputDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         Stage s = new Stage();
                                         s.setStageName(stageNameEdit.getText().toString());
-                                        s.setDifficulty(difficultySpinner.getSelectedItemPosition());
-                                        s.setPayloadMass(payloadMassSpinner.getSelectedItemPosition());
+                                        s.setDifficulty(maneuverDifficultyPicker.getValue());
+                                        s.setPayloadMass(payloadMassPicker.getValue());
                                         stages.add(s);
                                         stagesAdapter.notifyDataSetChanged();
                                     }
@@ -86,20 +88,18 @@ public class MissionDetailsActivity extends AppCompatActivity {
                                     }
                                 });
 
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
+                // create input dialog
+                AlertDialog inputDialog = inputDialogBuilder.create();
 
                 // show it
-                alertDialog.show();
+                inputDialog.show();
             }
         });
 
-        //my code starts!!!! yeah!!!
         ListView stagesList = (ListView) findViewById(R.id.missionsListView);
         stagesAdapter = new StagesAdapter(this, stages);
 
         stagesList.setAdapter(stagesAdapter);
-
     }
 
     @Override

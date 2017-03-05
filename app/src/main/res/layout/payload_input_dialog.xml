@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
 
     <TextView
         android:text="Stage Name:"
@@ -31,11 +33,10 @@
         tools:text="Maneuver Difficulty:"
         android:contentDescription="Maneuver Difficulty:" />
 
-    <Spinner
+    <NumberPicker
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/maneuverDifficultySpinner"
-        android:spinnerMode="dialog" />
+        android:id="@+id/maneuverDifficultyPicker" />
 
     <TextView
         android:text="Payload Mass:"
@@ -46,8 +47,9 @@
         tools:text="Payload Mass:"
         android:contentDescription="Payload Mass:" />
 
-    <Spinner
+    <NumberPicker
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/payloadMassSpinner" />
+        android:id="@+id/payloadMassPicker" />
+
 </LinearLayout>
