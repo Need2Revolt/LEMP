@@ -57,7 +57,7 @@ public class MissionDetailsActivity extends AppCompatActivity {
                 final TextView stageNameEdit = (TextView) stageInputView.findViewById(R.id.payloadNameText);
                 final NumberPicker maneuverDifficultyPicker = (NumberPicker)stageInputView.findViewById(R.id.maneuverDifficultyPicker);
                 maneuverDifficultyPicker.setMinValue(0);
-                maneuverDifficultyPicker.setMaxValue(5); //TODO put this in a constant or something
+                maneuverDifficultyPicker.setMaxValue(9); //TODO put this in a constant or something
                 final NumberPicker payloadMassPicker = (NumberPicker)stageInputView.findViewById(R.id.payloadMassPicker);
                 payloadMassPicker.setMinValue(0);
                 payloadMassPicker.setMaxValue(20); //TODO put this in a constant or something
@@ -73,12 +73,9 @@ public class MissionDetailsActivity extends AppCompatActivity {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        Stage s = new Stage();
-                                        s.setStageName(stageNameEdit.getText().toString());
-                                        s.setDifficulty(maneuverDifficultyPicker.getValue());
-                                        s.setPayloadMass(payloadMassPicker.getValue());
-                                        stages.add(s);
-                                        stagesAdapter.notifyDataSetChanged();
+                                        buildNewStage(stageNameEdit.getText().toString(),
+                                                maneuverDifficultyPicker.getValue(),
+                                                payloadMassPicker.getValue());
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -100,6 +97,15 @@ public class MissionDetailsActivity extends AppCompatActivity {
         stagesAdapter = new StagesAdapter(this, stages);
 
         stagesList.setAdapter(stagesAdapter);
+    }
+
+    private void buildNewStage(String stageName, int difficulty, int payload) {
+        Stage s = new Stage();
+        s.setStageName(stageName);
+        s.setDifficulty(difficulty);
+        s.setPayloadMass(payload);
+        stages.add(s);
+        stagesAdapter.notifyDataSetChanged();
     }
 
     @Override
