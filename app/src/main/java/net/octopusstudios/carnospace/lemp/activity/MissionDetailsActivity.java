@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import net.octopusstudios.carnospace.lemp.R;
@@ -53,10 +54,10 @@ public class MissionDetailsActivity extends AppCompatActivity {
 
                 //TODO change to actual mission details input
                 LayoutInflater li = LayoutInflater.from(ctx);
-                View promptsView = li.inflate(R.layout.mission_input_dialog, null);
-                final TextView stageNameEdit = (TextView) promptsView.findViewById(R.id.missionNameEdit);
-                //final NumberPicker difficultyPicker = (NumberPicker)promptsView.findViewById(R.id.difficultyPicker);
-                //final NumberPicker payloadPicker = (NumberPicker)promptsView.findViewById(R.id.payloadPicker);
+                View promptsView = li.inflate(R.layout.payload_input_dialog, null);
+                final TextView stageNameEdit = (TextView) promptsView.findViewById(R.id.payloadNameText);
+                final Spinner difficultySpinner = (Spinner)promptsView.findViewById(R.id.maneuverDifficultySpinner);
+                final Spinner payloadMassSpinner = (Spinner)promptsView.findViewById(R.id.payloadMassSpinner);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         ctx);
@@ -72,8 +73,8 @@ public class MissionDetailsActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int id) {
                                         Stage s = new Stage();
                                         s.setStageName(stageNameEdit.getText().toString());
-                                        //s.setDifficulty(difficultyPicker.getValue());
-                                        //s.setPayloadMass(payloadPicker.getValue());
+                                        s.setDifficulty(difficultySpinner.getSelectedItemPosition());
+                                        s.setPayloadMass(payloadMassSpinner.getSelectedItemPosition());
                                         stages.add(s);
                                         stagesAdapter.notifyDataSetChanged();
                                     }

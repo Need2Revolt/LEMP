@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Stage Name:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/payloadNameLabel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:text="Stage Name:"
+        android:contentDescription="Stage Name:" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/payloadNameText"
+        android:singleLine="true"
+        android:selectAllOnFocus="true" />
+
+    <TextView
+        android:text="Maneuver Difficulty:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/maneuverDifficultyLabel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:text="Maneuver Difficulty:"
+        android:contentDescription="Maneuver Difficulty:" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/maneuverDifficultySpinner"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:text="Payload Mass:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/payloadMassLabel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:text="Payload Mass:"
+        android:contentDescription="Payload Mass:" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/payloadMassSpinner" />
+</LinearLayout>
