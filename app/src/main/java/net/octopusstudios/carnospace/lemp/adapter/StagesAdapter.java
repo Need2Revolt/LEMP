@@ -3,7 +3,7 @@
  * Released under GPL v3
  * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
  */
-package net.octopusstudios.carnospace.lemp.adapters;
+package net.octopusstudios.carnospace.lemp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,9 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import net.octopusstudios.carnospace.lemp.R;
-import net.octopusstudios.carnospace.lemp.pojo.Mission;
+import net.octopusstudios.carnospace.lemp.pojo.Stage;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,35 +22,35 @@ import java.util.List;
  * Created by Davide on 12/02/2017.
  */
 
-public class MissionsAdapter extends BaseAdapter {
+public class StagesAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
 
-    private List<Mission> missions;
+    private List<Stage> stages;
 
-    public MissionsAdapter(Context context) {
+    public StagesAdapter(Context context) {
         super();
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        missions = new ArrayList<Mission>(0);
+        stages = new ArrayList<Stage>(0);
     }
 
-    public MissionsAdapter(Context context, List<Mission> missions) {
+    public StagesAdapter(Context context, List<Stage> stages) {
         super();
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.missions = missions;
+        this.stages = stages;
     }
 
     @Override
     public int getCount() {
-        return missions.size();
+        return stages.size();
     }
 
     @Override
     public Object getItem(int i) {
         try {
-            return missions.get(i);
+            return stages.get(i);
         }
         catch (ArrayIndexOutOfBoundsException e) {
             return null;
@@ -66,25 +65,29 @@ public class MissionsAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null) {
-            view = inflater.inflate(R.layout.mission_listview_item, null);
+            view = inflater.inflate(R.layout.stage_listview_item, null);
         }
 
         fillRowWithValues(i, view);
+
 
         return view;
     }
 
     private void fillRowWithValues(int i, View view) {
-        TextView missionNameText = (TextView) view.findViewById(R.id.missionNameText);
-        missionNameText.setText(missions.get(i).getName());
+        TextView stageNameText = (TextView) view.findViewById(R.id.stageName);
+        stageNameText.setText(stages.get(i).getStageName());
 
-        TextView totalCostText = (TextView) view.findViewById(R.id.detailTotalCostText);
-        totalCostText.setText("Total Cost " + missions.get(i).getTotalCost());
+        TextView difficultyText = (TextView) view.findViewById(R.id.difficulty);
+        difficultyText.setText(String.valueOf(stages.get(i).getDifficulty()));
 
-        TextView dateText = (TextView) view.findViewById(R.id.missionDateText);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss z(Z)");
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss");
-        String date = sdf.format(missions.get(i).getDate().getTime());
-        dateText.setText(date);
+        TextView payloadText = (TextView) view.findViewById(R.id.payloadMass);
+        payloadText.setText(String.valueOf(stages.get(i).getPayloadMass()));
+
+        TextView rocketsListText = (TextView) view.findViewById(R.id.rocketsList);
+        rocketsListText.setText(stages.get(i).getRocktesList().toString());
+
+        TextView rocketMassText = (TextView) view.findViewById(R.id.rocketsMass);
+        rocketMassText.setText(String.valueOf(stages.get(i).getRocketsMass()));
     }
 }

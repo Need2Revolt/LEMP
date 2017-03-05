@@ -3,7 +3,7 @@
  * Released under GPL v3
  * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
  */
-package net.octopusstudios.carnospace.lemp;
+package net.octopusstudios.carnospace.lemp.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,13 +18,17 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import net.octopusstudios.carnospace.lemp.adapters.MissionsAdapter;
+import net.octopusstudios.carnospace.lemp.R;
+import net.octopusstudios.carnospace.lemp.adapter.MissionsAdapter;
 import net.octopusstudios.carnospace.lemp.listener.AddMissionListener;
 import net.octopusstudios.carnospace.lemp.pojo.Mission;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Davide on 12/02/2017.
+ */
 public class MissionsListerActivity extends AppCompatActivity {
 
     private MissionsAdapter missionsAdapter;
@@ -55,9 +59,8 @@ public class MissionsListerActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                //TODO restore this
-                //Intent intent = new Intent(ctx, MissionDetails.class);
-                //startActivity(intent);
+                Intent intent = new Intent(ctx, MissionDetails.class);
+                startActivity(intent);
             }
         });
     }

@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import net.octopusstudios.carnospace.lemp.MissionsListerActivity;
+import net.octopusstudios.carnospace.lemp.activity.MissionsListerActivity;
 
 /**
  * Created by Davide on 13/02/2017.

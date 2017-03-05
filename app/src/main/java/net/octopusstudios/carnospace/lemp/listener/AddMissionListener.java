@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.octopusstudios.carnospace.lemp.R;
-import net.octopusstudios.carnospace.lemp.adapters.MissionsAdapter;
+import net.octopusstudios.carnospace.lemp.adapter.MissionsAdapter;
 import net.octopusstudios.carnospace.lemp.pojo.Mission;
 
 import java.util.List;
