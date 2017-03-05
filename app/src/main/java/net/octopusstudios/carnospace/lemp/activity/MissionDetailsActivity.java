@@ -51,6 +51,7 @@ public class MissionDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //TODO change to actual mission details input
                 LayoutInflater li = LayoutInflater.from(ctx);
                 View promptsView = li.inflate(R.layout.mission_input_dialog, null);
                 final TextView stageNameEdit = (TextView) promptsView.findViewById(R.id.missionNameEdit);
