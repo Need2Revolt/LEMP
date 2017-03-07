@@ -121,7 +121,7 @@ public class Stage {
         int mass;
         List<String> rockets = new ArrayList<>(2);
         int i = 0;
-        while(payloadMass > difficultyList.get(i)) { //TODO what if i goes bigger than 3?
+        while(payloadMass > difficultyList.get(i) && i < 3) {
             i++;
         }
 
@@ -133,18 +133,33 @@ public class Stage {
         double payloadMassCopy = payloadMass;
         int newMassCandidate = Integer.MAX_VALUE;
         List<String> newRocketsCandidate = new ArrayList<>(4);
-        while(--i > 0 && payloadMassCopy > 0) {
+        while(--i >= 0 && payloadMassCopy > 0) {
             //payload/prior trust * mass) + (payload%prior.trust)/prior.prior.trust * mass) + etc...
             int times = (int)(payloadMassCopy/difficultyList.get(i));
-            newMassCandidate += times * massList[i];
-            for(int j = 0; j < times; j++) {
-                newRocketsCandidate.add(rocketNamesList[i]);
+            int stageMass = times * massList[i];
+            if(stageMass > massList[i+1]) {
+                if (newMassCandidate == Integer.MAX_VALUE) {
+                    newMassCandidate = massList[i];
+                } else {
+                    newMassCandidate += massList[i];
+                }
+                newRocketsCandidate.add(rocketNamesList[i+1]);
+            }
+            else {
+                if (newMassCandidate == Integer.MAX_VALUE) {
+                    newMassCandidate = times * massList[i];
+                } else {
+                    newMassCandidate += times * massList[i];
+                }
+                for (int j = 0; j < times; j++) {
+                    newRocketsCandidate.add(rocketNamesList[i]);
+                }
             }
             payloadMassCopy = payloadMassCopy%difficultyList.get(i);
         }
 
         //if total mass < previous total mass then new minimum candidate.
-        if(newMassCandidate < mass) {
+        if(newMassCandidate <= mass) {
             mass = newMassCandidate;
             rockets = newRocketsCandidate;
         }
