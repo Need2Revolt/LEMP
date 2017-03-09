@@ -80,12 +80,75 @@ public class RocketOptimizationTest {
     }
 
     @Test
-    public void veryHeavyPayload() {
+    public void cornerCases() {
+        //TODO robustness, like 0 payload or other funky stuffs
+    }
+
+    //---------------- tests from the game manual, just to be sure...
+    @Test
+    public void rulebookExampleLunarDescent() {
+        //lunar descent
+        singleRocketRequired(0, 2, 1);
+        //lunar transfer
+        singleRocketRequired(1, 3, 2);
+        //to orbit
+        singleRocketRequired(2, 5, 6);
+        //launch
+        singleRocketRequired(2, 3, 15);
 
     }
 
     @Test
-    public void cornerCases() {
+    public void rulebookExampleLunarDirect() {
+        //earth transfer
+        singleRocketRequired(1, 3, 2);
 
+        //lunar ascent
+        singleRocketRequired(1, 2, 6);
+
+        //lunar descent
+        /*
+        {
+            //expected result
+            List<String> expectedResult = new ArrayList<>(2);
+            expectedResult.add(Stage.rocketNamesList[0]);
+            expectedResult.add(Stage.rocketNamesList[1]);
+
+            //test logic
+            Stage stage = new Stage("multiJuno", 2, 10);
+            assertNotNull(stage);
+            assertEquals(expectedResult, stage.getRocktesList());
+        }
+        */
+
+        //lunar transfer
+        singleRocketRequired(2, 3, 15);
+
+        //to orbit
+        {
+            //expected result
+            List<String> expectedResult = new ArrayList<>(2);
+            expectedResult.add(Stage.rocketNamesList[3]);
+            expectedResult.add(Stage.rocketNamesList[2]);
+
+            //test logic
+            Stage stage = new Stage("multiJuno", 5, 24);
+            assertNotNull(stage);
+            assertEquals(expectedResult, stage.getRocktesList());
+        }
+
+        //launch
+        {
+            //expected result
+            List<String> expectedResult = new ArrayList<>(3);
+            expectedResult.add(Stage.rocketNamesList[3]);
+            expectedResult.add(Stage.rocketNamesList[1]);
+            expectedResult.add(Stage.rocketNamesList[1]);
+
+            //test logic
+            Stage stage = new Stage("multiJuno", 3, 53);
+            assertNotNull(stage);
+            assertEquals(expectedResult, stage.getRocktesList());
+        }
     }
 }

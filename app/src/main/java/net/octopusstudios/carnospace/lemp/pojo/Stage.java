@@ -153,21 +153,13 @@ public class Stage {
             //if the total mass of the smaller rockets is bigger than the next heavier rocket,
             //better use the heavier then...
             if(stageMass > massList[i+1]) {
-                if (newMassCandidate == Integer.MAX_VALUE) {
-                    newMassCandidate = massList[i+1];
-                } else {
-                    newMassCandidate += massList[i+1];
-                }
+                newMassCandidate += massList[i+1];
                 newRocketsCandidate.add(rocketNamesList[i+1]);
                 payloadMassCopy -= difficultyList.get(i+1);
             }
             //otherwise the smaller ones are the best choice
             else {
-                if (newMassCandidate == Integer.MAX_VALUE) {
-                    newMassCandidate = times * massList[i];
-                } else {
-                    newMassCandidate += times * massList[i];
-                }
+                newMassCandidate += times * massList[i];
                 for (int j = 0; j < times; j++) {
                     newRocketsCandidate.add(rocketNamesList[i]);
                 }
@@ -176,7 +168,7 @@ public class Stage {
         }
 
         //if total mass < previous total mass then new minimum candidate.
-        if(newMassCandidate <= mass) {
+        if(newMassCandidate != 0 && newMassCandidate <= mass) {
             mass = newMassCandidate;
             rockets = newRocketsCandidate;
             rockets.addAll(basicRockets);
