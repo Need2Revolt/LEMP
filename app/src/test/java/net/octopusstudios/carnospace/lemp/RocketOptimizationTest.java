@@ -64,7 +64,7 @@ public class RocketOptimizationTest {
 
     @Test
     public void multipleSaturn() {
-        multipleRocketsRequired(3, 1, 190);
+        multipleRocketsRequired(3, 1, 355);
     }
 
     private void multipleRocketsRequired(int rocketPos, int difficulty, int payloadMass) {

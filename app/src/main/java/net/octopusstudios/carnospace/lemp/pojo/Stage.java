@@ -118,33 +118,50 @@ public class Stage {
         List<Double> difficultyList = difficultiesMap.get(difficulty);
 
         //scan the row until payload > rocket trust
-        int mass;
+        int mass = 0;
         List<String> rockets = new ArrayList<>(2);
+        double payloadMassCopy = payloadMass;
         int i = 0;
-        while(payloadMass > difficultyList.get(i) && i < 3) {
-            i++;
+        int basicMass = 0;
+        List<String> basicRockets = new ArrayList<>(2);
+        while(payloadMassCopy > difficultyList.get(i)) {
+            if(i < 3) {
+                i++;
+            }
+            else {
+                basicMass += massList[i];
+                basicRockets.add(rocketNamesList[i]);
+                payloadMassCopy -= difficultyList.get(i);
+                i=0;
+            }
         }
 
         //save the rocket as candidate and note it's mass
-        mass = massList[i];
+        mass = basicMass;
+        rockets.addAll(basicRockets);
+        mass += massList[i];
         rockets.add(rocketNamesList[i]);
 
         //scan lighter rockets
-        double payloadMassCopy = payloadMass;
-        int newMassCandidate = Integer.MAX_VALUE;
+        //payloadMassCopy = payloadMass;
+        int newMassCandidate = basicMass;
         List<String> newRocketsCandidate = new ArrayList<>(4);
         while(--i >= 0 && payloadMassCopy > 0) {
             //payload/prior trust * mass) + (payload%prior.trust)/prior.prior.trust * mass) + etc...
             int times = (int)(payloadMassCopy/difficultyList.get(i));
             int stageMass = times * massList[i];
+            //if the total mass of the smaller rockets is bigger than the next heavier rocket,
+            //better use the heavier then...
             if(stageMass > massList[i+1]) {
                 if (newMassCandidate == Integer.MAX_VALUE) {
-                    newMassCandidate = massList[i];
+                    newMassCandidate = massList[i+1];
                 } else {
-                    newMassCandidate += massList[i];
+                    newMassCandidate += massList[i+1];
                 }
                 newRocketsCandidate.add(rocketNamesList[i+1]);
+                payloadMassCopy -= difficultyList.get(i+1);
             }
+            //otherwise the smaller ones are the best choice
             else {
                 if (newMassCandidate == Integer.MAX_VALUE) {
                     newMassCandidate = times * massList[i];
@@ -154,14 +171,15 @@ public class Stage {
                 for (int j = 0; j < times; j++) {
                     newRocketsCandidate.add(rocketNamesList[i]);
                 }
+                payloadMassCopy -= times * difficultyList.get(i);
             }
-            payloadMassCopy = payloadMassCopy%difficultyList.get(i);
         }
 
         //if total mass < previous total mass then new minimum candidate.
         if(newMassCandidate <= mass) {
             mass = newMassCandidate;
             rockets = newRocketsCandidate;
+            rockets.addAll(basicRockets);
         }
 
         //set calculated values
