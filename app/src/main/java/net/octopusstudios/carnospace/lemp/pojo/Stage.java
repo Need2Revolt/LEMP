@@ -118,11 +118,11 @@ public class Stage {
         List<Double> difficultyList = difficultiesMap.get(difficulty);
 
         //scan the row until payload > rocket trust
-        int mass = 0;
+        float mass = 0;
         List<String> rockets = new ArrayList<>(2);
         double payloadMassCopy = payloadMass;
         int i = 0;
-        int basicMass = 0;
+        float basicMass = 0;
         List<String> basicRockets = new ArrayList<>(2);
         while(payloadMassCopy > difficultyList.get(i)) {
             if(i < 3) {
@@ -144,15 +144,18 @@ public class Stage {
 
         //scan lighter rockets
         //payloadMassCopy = payloadMass;
-        int newMassCandidate = basicMass;
+        float newMassCandidate = basicMass;
         List<String> newRocketsCandidate = new ArrayList<>(4);
         while(--i >= 0 && payloadMassCopy > 0) {
             //payload/prior trust * mass) + (payload%prior.trust)/prior.prior.trust * mass) + etc...
             int times = (int)(payloadMassCopy/difficultyList.get(i));
+            if(payloadMassCopy < difficultyList.get(i)) {
+                times = 1;
+            }
             int stageMass = times * massList[i];
             //if the total mass of the smaller rockets is bigger than the next heavier rocket,
             //better use the heavier then...
-            if(stageMass > massList[i+1]) {
+            if(stageMass >= massList[i+1]) {
                 newMassCandidate += massList[i+1];
                 newRocketsCandidate.add(rocketNamesList[i+1]);
                 payloadMassCopy -= difficultyList.get(i+1);
@@ -168,14 +171,14 @@ public class Stage {
         }
 
         //if total mass < previous total mass then new minimum candidate.
-        if(newMassCandidate != 0 && newMassCandidate <= mass) {
+        if(newMassCandidate != 0 && newMassCandidate < mass) {
             mass = newMassCandidate;
             rockets = newRocketsCandidate;
             rockets.addAll(basicRockets);
         }
 
         //set calculated values
-        rocketsMass = mass;
+        rocketsMass = (int)mass;
         rocktesList = rockets;
     }
 
