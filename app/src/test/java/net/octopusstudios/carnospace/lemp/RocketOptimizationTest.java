@@ -153,6 +153,59 @@ public class RocketOptimizationTest {
     }
 
     @Test
+    public void rulebookExampleRendezvous() {
+        //earth transfer
+        {
+            //expected result
+            List<String> expectedResult = new ArrayList<>(3);
+            expectedResult.add(Stage.rocketNamesList[0]);
+            expectedResult.add(Stage.rocketNamesList[0]);
+            expectedResult.add(Stage.rocketNamesList[0]);
+
+            //test logic
+            Stage stage = new Stage("multiStage", 3, 1);
+            assertNotNull(stage);
+            assertEquals(expectedResult, stage.getRocktesList());
+        }
+
+        //lunar ascent
+        singleRocketRequired(1,2,4);
+
+        //lunar descent
+        singleRocketRequired(1,2,8);
+
+        //lunar transfer
+        singleRocketRequired(2,3,12);
+
+        //to orbit
+        {
+            //expected result
+            List<String> expectedResult = new ArrayList<>(2);
+            expectedResult.add(Stage.rocketNamesList[3]);
+            expectedResult.add(Stage.rocketNamesList[2]);
+
+            //test logic
+            Stage stage = new Stage("multiStage", 5, 23);
+            assertNotNull(stage);
+            assertEquals(expectedResult, stage.getRocktesList());
+        }
+
+        //launch
+        {
+            //expected result
+            List<String> expectedResult = new ArrayList<>(3);
+            expectedResult.add(Stage.rocketNamesList[1]);
+            expectedResult.add(Stage.rocketNamesList[0]);
+            expectedResult.add(Stage.rocketNamesList[3]);
+
+            //test logic
+            Stage stage = new Stage("multiStage", 3, 52);
+            assertNotNull(stage);
+            assertEquals(expectedResult, stage.getRocktesList());
+        }
+    }
+
+    @Test
     public void problematic1() {
         //expected result
         List<String> expectedResult = new ArrayList<>(2);
