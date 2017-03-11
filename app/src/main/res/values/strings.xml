@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Leaving Earth Mission Planner</string>
     <string name="action_settings">About</string>
-    <string name="missionList">Missions list</string>
-    <string name="missionDetails">Current mission details</string>
+    <string name="missionList">Command center</string>
+    <string name="missionDetails">Mission control</string>
+
+    <!-- ingame text -->
+    <string name="difficultyDisplay">Diff. %d</string>
+    <string name="payloadDisplay">Payload: %d</string>
+    <string name="rocketsListDisplay">Required rockets: %s</string>
+    <string name="rocketsMassDisplay">Mass: %d</string>
 </resources>

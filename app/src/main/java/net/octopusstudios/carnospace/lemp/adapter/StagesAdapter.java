@@ -6,6 +6,7 @@
 package net.octopusstudios.carnospace.lemp.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class StagesAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
 
+    private Resources res;
+
     private List<Stage> stages;
 
     public StagesAdapter(Context context) {
@@ -39,6 +42,7 @@ public class StagesAdapter extends BaseAdapter {
         super();
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        res = context.getResources();
         this.stages = stages;
     }
 
@@ -75,19 +79,21 @@ public class StagesAdapter extends BaseAdapter {
     }
 
     private void fillRowWithValues(int i, View view) {
+        Stage stage = stages.get(i);
+
         TextView stageNameText = (TextView) view.findViewById(R.id.stageName);
-        stageNameText.setText(stages.get(i).getStageName());
+        stageNameText.setText(stage.getStageName());
 
         TextView difficultyText = (TextView) view.findViewById(R.id.difficulty);
-        difficultyText.setText(String.valueOf(stages.get(i).getDifficulty()));
+        difficultyText.setText(res.getString(R.string.difficultyDisplay, stage.getDifficulty()));
 
         TextView payloadText = (TextView) view.findViewById(R.id.payloadMass);
-        payloadText.setText(String.valueOf(stages.get(i).getPayloadMass()));
+        payloadText.setText(res.getString(R.string.payloadDisplay, stage.getPayloadMass()));
 
         TextView rocketsListText = (TextView) view.findViewById(R.id.rocketsList);
-        rocketsListText.setText(stages.get(i).getRocktesList().toString());
+        rocketsListText.setText(res.getString(R.string.rocketsListDisplay, stage.getRocktesList().toString()));
 
         TextView rocketMassText = (TextView) view.findViewById(R.id.rocketsMass);
-        rocketMassText.setText(String.valueOf(stages.get(i).getRocketsMass()));
+        rocketMassText.setText(res.getString(R.string.rocketsMassDisplay, stage.getRocketsMass()));
     }
 }
