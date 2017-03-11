@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:id="@+id/stageListItem"
-    android:layout_weight="1">
+    android:id="@+id/stageListItem">
 
     <TextView
         android:text="Stage Name"
         android:id="@+id/stageName"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        app:layout_constraintBaseline_toBaselineOf="@+id/difficulty"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
@@ -24,10 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/difficulty"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/stageName"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
@@ -35,29 +24,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/payloadMass"
-        app:layout_constraintBaseline_toBaselineOf="@+id/difficulty"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/difficulty"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
         android:text="Rockets List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rocketsList"
-        app:layout_constraintBaseline_toBaselineOf="@+id/payloadMass"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/payloadMass" />
+        android:id="@+id/rocketsList" />
 
     <TextView
         android:text="Rockets Mass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rocketsMass"
-        app:layout_constraintBaseline_toBaselineOf="@+id/rocketsList"
-        tools:layout_constraintBaseline_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/rocketsList" />
-</android.support.constraint.ConstraintLayout>
+        android:id="@+id/rocketsMass" />
+</LinearLayout>

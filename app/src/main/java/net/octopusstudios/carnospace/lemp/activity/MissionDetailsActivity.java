@@ -34,15 +34,16 @@ public class MissionDetailsActivity extends AppCompatActivity {
 
     private StagesAdapter stagesAdapter;
 
-    private List<Stage> stages;
+    private List<Stage> stages = new ArrayList<>(0);
 
+    //TODO onCreate seems to be called several times during application lifecycle, like when screen rotates...
+    //thus, creation of stages list is in the wrong place
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_missions_lister);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        stages = new ArrayList<Stage>(0);
 
 
         final Context ctx = this;
@@ -61,6 +62,12 @@ public class MissionDetailsActivity extends AppCompatActivity {
                 final NumberPicker payloadMassPicker = (NumberPicker)stageInputView.findViewById(R.id.payloadMassPicker);
                 payloadMassPicker.setMinValue(0);
                 payloadMassPicker.setMaxValue(20); //TODO put this in a constant or something
+                //auto fill payload with previous stage total mass
+                if(stages.size() > 0)
+                {
+                    Stage previousStage = stages.get(stages.size() - 1);
+                    payloadMassPicker.setValue(previousStage.getTotalMass());
+                }
 
                 AlertDialog.Builder inputDialogBuilder = new AlertDialog.Builder(ctx);
 
@@ -100,10 +107,7 @@ public class MissionDetailsActivity extends AppCompatActivity {
     }
 
     private void buildNewStage(String stageName, int difficulty, int payload) {
-        Stage s = new Stage();
-        s.setStageName(stageName);
-        s.setDifficulty(difficulty);
-        s.setPayloadMass(payload);
+        Stage s = new Stage(stageName, difficulty, payload);
         stages.add(s);
         stagesAdapter.notifyDataSetChanged();
     }

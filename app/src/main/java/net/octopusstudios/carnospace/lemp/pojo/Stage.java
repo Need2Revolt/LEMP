@@ -221,4 +221,8 @@ public class Stage {
     public void setRocketsMass(int rocketsMass) {
         this.rocketsMass = rocketsMass;
     }
+
+    public int getTotalMass() {
+        return rocketsMass + payloadMass;
+    }
 }
