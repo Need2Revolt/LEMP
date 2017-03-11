@@ -5,36 +5,56 @@
     android:layout_height="match_parent"
     android:id="@+id/stageListItem">
 
-    <TextView
-        android:text="Stage Name"
-        android:id="@+id/stageName"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:text="Difficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/difficulty"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+        <TextView
+            android:text="Stage Name"
+            android:id="@+id/stageName"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_weight="1" />
 
-    <TextView
-        android:text="Payload Mass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/payloadMass"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+        <TextView
+            android:text="Difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/difficulty"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_weight="1" />
 
-    <TextView
-        android:text="Rockets List"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rocketsList" />
+        <TextView
+            android:text="Payload Mass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/payloadMass"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_weight="1" />
 
-    <TextView
-        android:text="Rockets Mass"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rocketsMass" />
+        android:layout_weight="1">
+
+        <TextView
+            android:text="Rockets List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rocketsList"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Rockets Mass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rocketsMass"
+            android:layout_weight="1" />
+    </LinearLayout>
+
 </LinearLayout>
