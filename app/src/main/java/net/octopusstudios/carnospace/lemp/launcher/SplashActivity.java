@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         try {
-            Thread.sleep(5000); //TODO this is temporary, remove it
+            Thread.sleep(1000); //TODO this is temporary, remove it
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
