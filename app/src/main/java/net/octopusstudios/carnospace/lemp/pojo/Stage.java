@@ -5,6 +5,7 @@
  */
 package net.octopusstudios.carnospace.lemp.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Map;
  * Created by Davide on 12/02/2017.
  */
 
-public class Stage {
+public class Stage implements Serializable {
 
     public static final int[] massList = {1, 4, 9, 20};
     public static final String[] rocketNamesList = {"Juno", "Atlas", "Soyuz", "Saturn"};

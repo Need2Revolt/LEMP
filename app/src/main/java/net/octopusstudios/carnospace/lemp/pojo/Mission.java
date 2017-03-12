@@ -6,6 +6,7 @@
 package net.octopusstudios.carnospace.lemp.pojo;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by Davide on 12/02/2017.
  */
 
-public class Mission {
+public class Mission implements Serializable {
     private String name;
     private int totalCost;
     private Calendar date;

@@ -3,6 +3,7 @@
     package="net.octopusstudios.carnospace.lemp">
 
     <application
+        android:name=".status.SharedState"
         android:allowBackup="true"
         android:icon="@mipmap/lemp"
         android:label="@string/app_name"

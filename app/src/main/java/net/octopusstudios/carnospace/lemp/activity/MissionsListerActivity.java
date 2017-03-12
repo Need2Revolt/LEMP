@@ -22,6 +22,7 @@ import net.octopusstudios.carnospace.lemp.R;
 import net.octopusstudios.carnospace.lemp.adapter.MissionsAdapter;
 import net.octopusstudios.carnospace.lemp.listener.AddMissionListener;
 import net.octopusstudios.carnospace.lemp.pojo.Mission;
+import net.octopusstudios.carnospace.lemp.status.SharedState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,8 @@ public class MissionsListerActivity extends AppCompatActivity {
 
         //setup internal objects
         missions = new ArrayList<>(0);
+        final SharedState sharedState = (SharedState) getApplicationContext();
+        sharedState.setMissions(missions);
 
         ListView missionsList = (ListView) findViewById(R.id.missionsListView);
         missionsAdapter = new MissionsAdapter(this, missions);
@@ -62,7 +65,8 @@ public class MissionsListerActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ctx, MissionDetailsActivity.class);
-                Mission selectedMission = (Mission)parent.getItemAtPosition(position);
+                //Mission selectedMission = (Mission)parent.getItemAtPosition(position);
+                sharedState.setSelectedMissionId(position);
                 //intent.putExtra("mission", selectedMission);
                 startActivity(intent);
             }

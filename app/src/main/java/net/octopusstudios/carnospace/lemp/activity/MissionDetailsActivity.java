@@ -8,6 +8,7 @@ package net.octopusstudios.carnospace.lemp.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,9 @@ import android.widget.TextView;
 
 import net.octopusstudios.carnospace.lemp.R;
 import net.octopusstudios.carnospace.lemp.adapter.StagesAdapter;
+import net.octopusstudios.carnospace.lemp.pojo.Mission;
 import net.octopusstudios.carnospace.lemp.pojo.Stage;
+import net.octopusstudios.carnospace.lemp.status.SharedState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,8 @@ public class MissionDetailsActivity extends AppCompatActivity {
 
     private StagesAdapter stagesAdapter;
 
-    private List<Stage> stages = new ArrayList<>(0);
+    //private List<Stage> stages = new ArrayList<>(0);
+    private Mission mission;
 
     //TODO onCreate seems to be called several times during application lifecycle, like when screen rotates...
     //thus, creation of stages list is in the wrong place
@@ -44,6 +48,9 @@ public class MissionDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mission_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SharedState sharedState = (SharedState) getApplicationContext();
+        mission = sharedState.getSelectedMission();
 
 
         final Context ctx = this;
@@ -63,9 +70,9 @@ public class MissionDetailsActivity extends AppCompatActivity {
                 payloadMassPicker.setMinValue(0);
                 payloadMassPicker.setMaxValue(20); //TODO put this in a constant or something
                 //auto fill payload with previous stage total mass
-                if(stages.size() > 0)
+                if(mission.getMissionStages().size() > 0)
                 {
-                    Stage previousStage = stages.get(stages.size() - 1);
+                    Stage previousStage = mission.getMissionStages().get(mission.getMissionStages().size() - 1);
                     payloadMassPicker.setValue(previousStage.getTotalMass());
                 }
 
@@ -101,14 +108,15 @@ public class MissionDetailsActivity extends AppCompatActivity {
         });
 
         ListView stagesList = (ListView) findViewById(R.id.missionsListView);
-        stagesAdapter = new StagesAdapter(this, stages);
+        stagesAdapter = new StagesAdapter(this, mission.getMissionStages());
 
         stagesList.setAdapter(stagesAdapter);
+        stagesAdapter.notifyDataSetChanged();
     }
 
     private void buildNewStage(String stageName, int difficulty, int payload) {
         Stage s = new Stage(stageName, difficulty, payload);
-        stages.add(s);
+        mission.getMissionStages().add(s);
         stagesAdapter.notifyDataSetChanged();
     }
 
