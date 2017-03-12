@@ -6,7 +6,9 @@
 package net.octopusstudios.carnospace.lemp.pojo;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
@@ -17,6 +19,7 @@ public class Mission {
     private String name;
     private int totalCost;
     private Calendar date;
+    private List<Stage> missionStages;
 
     public Mission() {
     }
@@ -25,6 +28,7 @@ public class Mission {
         this.name = name;
         this.date = Calendar.getInstance();
         this.totalCost = 0;
+        missionStages = new ArrayList<>();
     }
 
     public String getName() {
@@ -49,5 +53,13 @@ public class Mission {
 
     public void setDate(Calendar date) {
         this.date = date;
+    }
+
+    public List<Stage> getMissionStages() {
+        return missionStages;
+    }
+
+    public void setMissionStages(List<Stage> missionStages) {
+        this.missionStages = missionStages;
     }
 }
