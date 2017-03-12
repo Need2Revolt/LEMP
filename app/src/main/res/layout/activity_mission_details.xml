@@ -30,6 +30,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:tint="@color/colorPrimaryDark"
-        app:srcCompat="@drawable/new_mission" />
+        app:srcCompat="@drawable/new_stage" />
 
 </android.support.design.widget.CoordinatorLayout>

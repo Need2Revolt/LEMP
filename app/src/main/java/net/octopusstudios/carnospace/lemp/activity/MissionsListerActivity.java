@@ -62,8 +62,8 @@ public class MissionsListerActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ctx, MissionDetailsActivity.class);
-                Object bho = parent.getItemAtPosition(position);
-                //intent.putExtra("mission", bho);
+                Mission selectedMission = (Mission)parent.getItemAtPosition(position);
+                //intent.putExtra("mission", selectedMission);
                 startActivity(intent);
             }
         });
