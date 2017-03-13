@@ -4,6 +4,7 @@ import android.app.Application;
 
 import net.octopusstudios.carnospace.lemp.pojo.Mission;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  */
 
 public class SharedState extends Application {
-    private List<Mission> missions;
+    private List<Mission> missions = new ArrayList<>(5);
     private int selectedMissionId;
 
     public void setMissions(List<Mission> missions) {

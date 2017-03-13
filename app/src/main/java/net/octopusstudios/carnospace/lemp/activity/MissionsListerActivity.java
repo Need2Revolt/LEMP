@@ -36,8 +36,6 @@ public class MissionsListerActivity extends AppCompatActivity {
 
     private List<Mission> missions;
 
-    //TODO onCreate seems to be called several times during application lifecycle, like when screen rotates...
-    //thus, creation of missions list is in the wrong place
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //setup main UI
@@ -48,9 +46,8 @@ public class MissionsListerActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         //setup internal objects
-        missions = new ArrayList<>(0);
         final SharedState sharedState = (SharedState) getApplicationContext();
-        sharedState.setMissions(missions);
+        missions = sharedState.getMissions();
 
         ListView missionsList = (ListView) findViewById(R.id.missionsListView);
         missionsAdapter = new MissionsAdapter(this, missions);
@@ -59,18 +56,17 @@ public class MissionsListerActivity extends AppCompatActivity {
         final Context ctx = this;
         fab.setOnClickListener(new AddMissionListener(ctx, missions, missionsAdapter));
 
-        //experimental
         missionsList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ctx, MissionDetailsActivity.class);
-                //Mission selectedMission = (Mission)parent.getItemAtPosition(position);
                 sharedState.setSelectedMissionId(position);
-                //intent.putExtra("mission", selectedMission);
                 startActivity(intent);
             }
         });
+
+        missionsAdapter.notifyDataSetChanged();
     }
 
     @Override

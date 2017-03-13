@@ -37,11 +37,8 @@ public class MissionDetailsActivity extends AppCompatActivity {
 
     private StagesAdapter stagesAdapter;
 
-    //private List<Stage> stages = new ArrayList<>(0);
     private Mission mission;
 
-    //TODO onCreate seems to be called several times during application lifecycle, like when screen rotates...
-    //thus, creation of stages list is in the wrong place
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +48,6 @@ public class MissionDetailsActivity extends AppCompatActivity {
 
         SharedState sharedState = (SharedState) getApplicationContext();
         mission = sharedState.getSelectedMission();
-
 
         final Context ctx = this;
 
