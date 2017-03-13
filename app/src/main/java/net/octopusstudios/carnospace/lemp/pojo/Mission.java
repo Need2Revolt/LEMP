@@ -23,13 +23,14 @@ public class Mission implements Serializable {
     private List<Stage> missionStages;
 
     public Mission() {
-    }
-
-    public Mission(String name) {
-        this.name = name;
         this.date = Calendar.getInstance();
         this.totalCost = 0;
         missionStages = new ArrayList<>();
+    }
+
+    public Mission(String name) {
+        this();
+        this.name = name;
     }
 
     public String getName() {
@@ -62,5 +63,9 @@ public class Mission implements Serializable {
 
     public void setMissionStages(List<Stage> missionStages) {
         this.missionStages = missionStages;
+    }
+
+    public void addStageCost(int stageCose) {
+        totalCost += stageCose;
     }
 }

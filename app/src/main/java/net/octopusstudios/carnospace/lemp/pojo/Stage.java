@@ -18,6 +18,7 @@ import java.util.Map;
 public class Stage implements Serializable {
 
     public static final int[] massList = {1, 4, 9, 20};
+    public static final int[] costList = {1, 5, 8, 15};
     public static final String[] rocketNamesList = {"Juno", "Atlas", "Soyuz", "Saturn"};
     public static final Map<Integer, List<Double>> difficultiesMap = new HashMap<>();
 
@@ -91,6 +92,7 @@ public class Stage implements Serializable {
     private int payloadMass;
     private List<String> rocktesList;
     private int rocketsMass;
+    private int totalCost;
 
     public Stage() {
         difficulty = 0;
@@ -120,10 +122,12 @@ public class Stage implements Serializable {
 
         //scan the row until payload > rocket trust
         float mass = 0;
+        int stageCost = 0;
         List<String> rockets = new ArrayList<>(2);
         double payloadMassCopy = payloadMass;
         int i = 0;
         float basicMass = 0;
+        int basicCost = 0;
         List<String> basicRockets = new ArrayList<>(2);
         while(payloadMassCopy > difficultyList.get(i)) {
             if(i < 3) {
@@ -131,6 +135,7 @@ public class Stage implements Serializable {
             }
             else {
                 basicMass += massList[i];
+                basicCost += costList[i];
                 basicRockets.add(rocketNamesList[i]);
                 payloadMassCopy -= difficultyList.get(i);
                 i=0;
@@ -138,14 +143,14 @@ public class Stage implements Serializable {
         }
 
         //save the rocket as candidate and note it's mass
-        mass = basicMass;
+        mass = basicMass + massList[i];
+        stageCost = basicCost + costList[i];
         rockets.addAll(basicRockets);
-        mass += massList[i];
         rockets.add(rocketNamesList[i]);
 
         //scan lighter rockets
-        //payloadMassCopy = payloadMass;
         float newMassCandidate = basicMass;
+        int newCostCandidate = basicCost;
         List<String> newRocketsCandidate = new ArrayList<>(4);
         while(--i >= 0 && payloadMassCopy > 0) {
             //payload/prior trust * mass) + (payload%prior.trust)/prior.prior.trust * mass) + etc...
@@ -158,12 +163,14 @@ public class Stage implements Serializable {
             //better use the heavier then...
             if(stageMass >= massList[i+1]) {
                 newMassCandidate += massList[i+1];
+                newCostCandidate += costList[i+1];
                 newRocketsCandidate.add(rocketNamesList[i+1]);
                 payloadMassCopy -= difficultyList.get(i+1);
             }
             //otherwise the smaller ones are the best choice
             else {
                 newMassCandidate += times * massList[i];
+                newCostCandidate += times * costList[i];
                 for (int j = 0; j < times; j++) {
                     newRocketsCandidate.add(rocketNamesList[i]);
                 }
@@ -176,11 +183,13 @@ public class Stage implements Serializable {
             mass = newMassCandidate;
             rockets = newRocketsCandidate;
             rockets.addAll(basicRockets);
+            stageCost = newCostCandidate;
         }
 
         //set calculated values
         rocketsMass = (int)mass;
         rocktesList = rockets;
+        totalCost = stageCost;
     }
 
     public String getStageName() {
@@ -225,5 +234,13 @@ public class Stage implements Serializable {
 
     public int getTotalMass() {
         return rocketsMass + payloadMass;
+    }
+
+    public int getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(int totalCost) {
+        this.totalCost = totalCost;
     }
 }

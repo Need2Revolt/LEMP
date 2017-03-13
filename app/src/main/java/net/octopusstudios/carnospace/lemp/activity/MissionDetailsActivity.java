@@ -112,6 +112,7 @@ public class MissionDetailsActivity extends AppCompatActivity {
 
     private void buildNewStage(String stageName, int difficulty, int payload) {
         Stage s = new Stage(stageName, difficulty, payload);
+        mission.addStageCost(s.getTotalCost());
         mission.getMissionStages().add(s);
         stagesAdapter.notifyDataSetChanged();
     }
