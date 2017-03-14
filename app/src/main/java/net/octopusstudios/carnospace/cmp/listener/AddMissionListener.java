@@ -3,7 +3,7 @@
  * Released under GPL v3
  * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
  */
-package net.octopusstudios.carnospace.lemp.listener;
+package net.octopusstudios.carnospace.cmp.listener;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,9 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import net.octopusstudios.carnospace.lemp.R;
-import net.octopusstudios.carnospace.lemp.adapter.MissionsAdapter;
-import net.octopusstudios.carnospace.lemp.pojo.Mission;
+import net.octopusstudios.carnospace.cmp.R;
+import net.octopusstudios.carnospace.cmp.adapter.MissionsAdapter;
+import net.octopusstudios.carnospace.cmp.pojo.Mission;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Leaving Earth Mission Planner</string>
+    <string name="app_name">CarnoSpace Mission Planner</string>
     <string name="action_settings">About</string>
     <string name="missionList">Command center</string>
     <string name="missionDetails">Mission control</string>

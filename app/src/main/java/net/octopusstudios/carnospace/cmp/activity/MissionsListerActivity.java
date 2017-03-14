@@ -3,7 +3,7 @@
  * Released under GPL v3
  * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
  */
-package net.octopusstudios.carnospace.lemp.activity;
+package net.octopusstudios.carnospace.cmp.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,13 +18,12 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import net.octopusstudios.carnospace.lemp.R;
-import net.octopusstudios.carnospace.lemp.adapter.MissionsAdapter;
-import net.octopusstudios.carnospace.lemp.listener.AddMissionListener;
-import net.octopusstudios.carnospace.lemp.pojo.Mission;
-import net.octopusstudios.carnospace.lemp.status.SharedState;
+import net.octopusstudios.carnospace.cmp.R;
+import net.octopusstudios.carnospace.cmp.adapter.MissionsAdapter;
+import net.octopusstudios.carnospace.cmp.listener.AddMissionListener;
+import net.octopusstudios.carnospace.cmp.pojo.Mission;
+import net.octopusstudios.carnospace.cmp.status.SharedState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

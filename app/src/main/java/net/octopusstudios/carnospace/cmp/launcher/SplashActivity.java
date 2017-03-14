@@ -3,13 +3,13 @@
  * Released under GPL v3
  * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
  */
-package net.octopusstudios.carnospace.lemp.launcher;
+package net.octopusstudios.carnospace.cmp.launcher;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import net.octopusstudios.carnospace.lemp.activity.MissionsListerActivity;
+import net.octopusstudios.carnospace.cmp.activity.MissionsListerActivity;
 
 /**
  * Created by Davide on 13/02/2017.

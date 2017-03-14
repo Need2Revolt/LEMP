@@ -11,14 +11,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="?attr/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="net.octopusstudios.carnospace.lemp.activity.MissionsListerActivity"
+    tools:context="net.octopusstudios.carnospace.cmp.activity.MissionsListerActivity"
     tools:showIn="@layout/activity_missions_lister">
 
     <ListView
+        android:id="@+id/missionsListView"
+        style="@style/Widget.AppCompat.ListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/missionsListView"
-        android:headerDividersEnabled="true"
         android:footerDividersEnabled="true"
-        style="@style/Widget.AppCompat.ListView" />
+        android:headerDividersEnabled="true" />
 </RelativeLayout>
