@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.octopusstudios.carnospace.lemp">
+    package="net.octopusstudios.carnospace.cmp">
 
     <application
-        android:name=".status.SharedState"
+        android:name="net.octopusstudios.carnospace.cmp.status.SharedState"
         android:allowBackup="true"
-        android:icon="@mipmap/lemp"
+        android:icon="@mipmap/cmp"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MissionsListerActivity"
+            android:name="net.octopusstudios.carnospace.cmp.activity.MissionsListerActivity"
             android:label="@string/missionList"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".activity.MissionDetailsActivity"
+            android:name="net.octopusstudios.carnospace.cmp.activity.MissionDetailsActivity"
             android:label="@string/missionDetails"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
-            android:name=".launcher.SplashActivity"
+            android:name="net.octopusstudios.carnospace.cmp.launcher.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

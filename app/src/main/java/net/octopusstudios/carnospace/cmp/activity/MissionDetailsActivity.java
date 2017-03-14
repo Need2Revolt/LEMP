@@ -3,12 +3,11 @@
  * Released under GPL v3
  * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
  */
-package net.octopusstudios.carnospace.lemp.activity;
+package net.octopusstudios.carnospace.cmp.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -21,14 +20,11 @@ import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import net.octopusstudios.carnospace.lemp.R;
-import net.octopusstudios.carnospace.lemp.adapter.StagesAdapter;
-import net.octopusstudios.carnospace.lemp.pojo.Mission;
-import net.octopusstudios.carnospace.lemp.pojo.Stage;
-import net.octopusstudios.carnospace.lemp.status.SharedState;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.octopusstudios.carnospace.cmp.R;
+import net.octopusstudios.carnospace.cmp.adapter.StagesAdapter;
+import net.octopusstudios.carnospace.cmp.pojo.Mission;
+import net.octopusstudios.carnospace.cmp.pojo.Stage;
+import net.octopusstudios.carnospace.cmp.status.SharedState;
 
 /**
  * Created by Davide on 12/02/2017.

@@ -1,4 +1,4 @@
-package net.octopusstudios.carnospace.lemp;
+package net.octopusstudios.carnospace.cmp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("net.octopusstudios.carnospace.lemp", appContext.getPackageName());
+        assertEquals("net.octopusstudios.carnospace.cmp", appContext.getPackageName());
     }
 }

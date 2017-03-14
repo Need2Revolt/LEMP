@@ -3,7 +3,7 @@
  * Released under GPL v3
  * Written by Need2Revolt (francesco.davide.carnovale@gmail.com)
  */
-package net.octopusstudios.carnospace.lemp.adapter;
+package net.octopusstudios.carnospace.cmp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import net.octopusstudios.carnospace.lemp.R;
-import net.octopusstudios.carnospace.lemp.pojo.Mission;
+import net.octopusstudios.carnospace.cmp.R;
+import net.octopusstudios.carnospace.cmp.pojo.Mission;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package net.octopusstudios.carnospace.lemp;
+package net.octopusstudios.carnospace.cmp;
 
-import net.octopusstudios.carnospace.lemp.pojo.Stage;
+import net.octopusstudios.carnospace.cmp.pojo.Stage;
 
 import org.junit.Test;
 

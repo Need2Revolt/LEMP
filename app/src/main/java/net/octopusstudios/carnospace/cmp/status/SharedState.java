@@ -1,8 +1,8 @@
-package net.octopusstudios.carnospace.lemp.status;
+package net.octopusstudios.carnospace.cmp.status;
 
 import android.app.Application;
 
-import net.octopusstudios.carnospace.lemp.pojo.Mission;
+import net.octopusstudios.carnospace.cmp.pojo.Mission;
 
 import java.util.ArrayList;
 import java.util.List;
