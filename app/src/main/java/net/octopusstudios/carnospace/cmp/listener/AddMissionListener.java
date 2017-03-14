@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import net.octopusstudios.carnospace.cmp.R;
 import net.octopusstudios.carnospace.cmp.adapter.MissionsAdapter;
+import net.octopusstudios.carnospace.cmp.persistence.MissionsDatabaseHelper;
 import net.octopusstudios.carnospace.cmp.pojo.Mission;
 
 import java.util.List;
@@ -55,6 +56,8 @@ public class AddMissionListener implements View.OnClickListener {
                                 String name = stageNameEdit.getText().toString();
                                 Mission m = new Mission(name);
                                 missions.add(m);
+                                MissionsDatabaseHelper dbHelper = new MissionsDatabaseHelper(ctx);
+                                dbHelper.saveMission(m);
                                 missionsAdapter.notifyDataSetChanged();
                             }
                         })
