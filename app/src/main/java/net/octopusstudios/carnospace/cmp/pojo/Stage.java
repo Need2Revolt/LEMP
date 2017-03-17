@@ -5,23 +5,40 @@
  */
 package net.octopusstudios.carnospace.cmp.pojo;
 
+import net.octopusstudios.carnospace.cmp.greendao.converter.StringListConverter;
+
+import org.greenrobot.greendao.annotation.Convert;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.ToOne;
+import org.greenrobot.greendao.annotation.Transient;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.DaoException;
 
 /**
  * Created by Davide on 12/02/2017.
  */
-
+@Entity
 public class Stage implements Serializable {
 
+    static final long serialVersionUID = 4639812939L;
+
+    @Transient
     public static final int[] massList = {1, 4, 9, 20};
+    @Transient
     public static final int[] costList = {1, 5, 8, 15};
+    @Transient
     public static final String[] rocketNamesList = {"Juno", "Atlas", "Soyuz", "Saturn"};
+    @Transient
     public static final Map<Integer, List<Double>> difficultiesMap = new HashMap<>();
 
+    //TODO remove this abort from here...
     static {
         List<Double> diff1 = new ArrayList<>(4);
         diff1.add(3d);
@@ -87,12 +104,28 @@ public class Stage implements Serializable {
         difficultiesMap.put(9, diff9);
     }
 
+    @Id private Long id;
+    private Long missionId;
     private String stageName;
     private int difficulty;
     private int payloadMass;
+    @Convert(converter = StringListConverter.class, columnType = String.class)
     private List<String> rocktesList;
     private int rocketsMass;
     private int totalCost;
+    @ToOne(joinProperty = "missionId")
+    private Mission mission;
+
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @Generated(hash = 1008513004)
+    private transient StageDao myDao;
+
+    @Generated(hash = 1680779066)
+    private transient Long mission__resolvedKey;
 
     public Stage() {
         difficulty = 0;
@@ -114,6 +147,19 @@ public class Stage implements Serializable {
         this.difficulty = difficulty;
         this.payloadMass = payloadMass;
         calculateRequiredRockets();
+    }
+
+    @Generated(hash = 1136843038)
+    public Stage(Long id, Long missionId, String stageName, int difficulty, int payloadMass,
+            List<String> rocktesList, int rocketsMass, int totalCost) {
+        this.id = id;
+        this.missionId = missionId;
+        this.stageName = stageName;
+        this.difficulty = difficulty;
+        this.payloadMass = payloadMass;
+        this.rocktesList = rocktesList;
+        this.rocketsMass = rocketsMass;
+        this.totalCost = totalCost;
     }
 
     private void calculateRequiredRockets() {
@@ -242,5 +288,93 @@ public class Stage implements Serializable {
 
     public void setTotalCost(int totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getMissionId() {
+        return this.missionId;
+    }
+
+    public void setMissionId(Long missionId) {
+        this.missionId = missionId;
+    }
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1058945532)
+    public Mission getMission() {
+        Long __key = this.missionId;
+        if (mission__resolvedKey == null || !mission__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            MissionDao targetDao = daoSession.getMissionDao();
+            Mission missionNew = targetDao.load(__key);
+            synchronized (this) {
+                mission = missionNew;
+                mission__resolvedKey = __key;
+            }
+        }
+        return mission;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1182541489)
+    public void setMission(Mission mission) {
+        synchronized (this) {
+            this.mission = mission;
+            missionId = mission == null ? null : mission.getId();
+            mission__resolvedKey = missionId;
+        }
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1015172054)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getStageDao() : null;
     }
 }

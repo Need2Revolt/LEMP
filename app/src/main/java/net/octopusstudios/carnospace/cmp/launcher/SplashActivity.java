@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import net.octopusstudios.carnospace.cmp.activity.MissionsListerActivity;
+import net.octopusstudios.carnospace.cmp.pojo.DaoSession;
+import net.octopusstudios.carnospace.cmp.status.SharedState;
 
 /**
  * Created by Davide on 13/02/2017.
@@ -21,11 +23,10 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
-            Thread.sleep(2000); //TODO this is temporary, remove it
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        SharedState sharedState = (SharedState)getApplicationContext();
+        DaoSession daoSession = sharedState.getDaoSession();
+        sharedState.setMissions(daoSession.getMissionDao().loadAll());
+
         Intent intent = new Intent(this, MissionsListerActivity.class);
         startActivity(intent);
         finish();

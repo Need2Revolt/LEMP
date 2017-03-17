@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import net.octopusstudios.carnospace.cmp.R;
 import net.octopusstudios.carnospace.cmp.adapter.MissionsAdapter;
+import net.octopusstudios.carnospace.cmp.pojo.DaoSession;
 import net.octopusstudios.carnospace.cmp.pojo.Mission;
+import net.octopusstudios.carnospace.cmp.status.SharedState;
 
 import java.util.List;
 
@@ -24,14 +26,16 @@ import java.util.List;
 
 public class AddMissionListener implements View.OnClickListener {
 
-    private final Context ctx;
+    private Context ctx;
     private List<Mission> missions;
     private MissionsAdapter missionsAdapter;
+    private DaoSession daoSession;
 
     public AddMissionListener(Context ctx, List<Mission> missions, MissionsAdapter missionsAdapter) {
         this.ctx = ctx;
         this.missions = missions;
         this.missionsAdapter = missionsAdapter;
+        daoSession = ((SharedState)ctx.getApplicationContext()).getDaoSession();
     }
 
     @Override
@@ -55,6 +59,7 @@ public class AddMissionListener implements View.OnClickListener {
                                 String name = stageNameEdit.getText().toString();
                                 Mission m = new Mission(name);
                                 missions.add(m);
+                                daoSession.insertOrReplace(m);
                                 missionsAdapter.notifyDataSetChanged();
                             }
                         })
