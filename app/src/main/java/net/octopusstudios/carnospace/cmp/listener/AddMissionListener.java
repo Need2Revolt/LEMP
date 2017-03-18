@@ -58,7 +58,7 @@ public class AddMissionListener implements View.OnClickListener {
                             public void onClick(DialogInterface dialog, int id) {
                                 String name = stageNameEdit.getText().toString();
                                 Mission m = new Mission(name);
-                                missions.add(m);
+                                missions.add(0, m);
                                 daoSession.insertOrReplace(m);
                                 missionsAdapter.notifyDataSetChanged();
                             }
