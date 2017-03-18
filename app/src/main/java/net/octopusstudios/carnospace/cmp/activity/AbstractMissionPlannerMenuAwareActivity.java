@@ -32,7 +32,7 @@ public abstract class AbstractMissionPlannerMenuAwareActivity  extends AppCompat
         int id = item.getItemId();
         Resources res = getResources();
         if (id == R.id.action_help) {
-            openPopupDialog(R.layout.mission_input_dialog, res.getString(R.string.close_help));
+            openPopupDialog(R.layout.help_popup, res.getString(R.string.close_help));
             return true;
         }
 

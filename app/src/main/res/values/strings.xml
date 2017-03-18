@@ -15,23 +15,29 @@
     <string name="rockets_mass_display">Mass: %d</string>
 
     <!-- long formatted text -->
-    <string name="about_text"><big><bold>CarnoSpace Mission Planner</bold></big>\n
-        \n
-        Utility application for Leaving Earth; mission planning made easy!\n
-        \n
-        Released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License V3</a>\n
-        \n
-        Application made by <a href="http://www.twitter.com/need2revolt">Need2Revolt</a>\n
-        \n
-        Find source code of this app at:\n
+    <string name="about_text"><big><b>CarnoSpace Mission Planner</b></big>\n
+        \nUtility application for Leaving Earth; mission planning made easy!\n
+        \nReleased under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License V3</a>\n
+        \nApplication made by <a href="http://www.twitter.com/need2revolt">Need2Revolt</a>\n
+        \nFind source code of this app at:\n
         <a href="https://github.com/Need2Revolt/LEMP">https://github.com/Need2Revolt/LEMP</a>\n
         <a href="https://bitbucket.org/Need2Revolt/lemp/">https://bitbucket.org/Need2Revolt/lemp/</a>\n
-        \n
-        All Leaving Earth related stuffs are copyright of <a href="https://www.lumenaris.com/about.html">The Lumenaris Group inc.</a>\n
+        \nAll Leaving Earth related stuffs are copyright of <a href="https://www.lumenaris.com/about.html">The Lumenaris Group inc.</a>\n
         \n
         \n</string>
 
     <string name="help_text">
-        
+        <big><b>Lost in space?</b></big>\n\n
+        First of all, if you haven\'t read Leaving Earth rulebook, go do it now and then come back
+        here. Basically this application is a digital version of the mission tables illustrated in
+        the rulebook, but with some nice automations to help you.\n
+        As the first thing, you want to create a mission, from <b>\"Command Center\"</b> view
+        using the floating button. Then choose a mission name, it can either be something that reminds
+        what the goal is, like <b>\"Man to Moon\"</b> or some fancy and secret name if you fear other space
+        agencies espionage, like <b>\"Seeliger Effect\"</b>. You\'ll see some information about the mission,
+        the most important one is the total cost that will be auto-calculated for you.\n
+        Now the next step is to add mission stages, just like the rulebook explains, in reverse order.
+        This will make mission planning easier.
+
     </string>
 </resources>
