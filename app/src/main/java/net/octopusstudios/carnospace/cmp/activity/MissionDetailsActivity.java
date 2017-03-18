@@ -24,7 +24,7 @@ import net.octopusstudios.carnospace.cmp.status.SharedState;
 /**
  * Created by Davide on 12/02/2017.
  */
-public class MissionDetailsActivity extends AppCompatActivity {
+public class MissionDetailsActivity extends AbstractMissionPlannerMenuAwareActivity {
 
     private StagesAdapter stagesAdapter;
     private Mission mission;
@@ -67,11 +67,7 @@ public class MissionDetailsActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
+        //TODO same as other class i suppose
         return super.onOptionsItemSelected(item);
     }
 

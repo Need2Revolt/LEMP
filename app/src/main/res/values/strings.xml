@@ -1,12 +1,37 @@
 <resources>
     <string name="app_name">CarnoSpace Mission Planner</string>
-    <string name="action_settings">About</string>
-    <string name="missionList">Command center</string>
-    <string name="missionDetails">Mission control</string>
+    <string name="mission_list">Command center</string>
+    <string name="mission_details">Mission control</string>
+
+    <string name="action_help">Huston, we have a problem!</string>
+    <string name="action_about">About</string>
+    <string name="close_about">Close</string>
+    <string name="close_help">Got it!</string>
 
     <!-- ingame text -->
-    <string name="difficultyDisplay">Diff. %d</string>
-    <string name="payloadDisplay">Payload: %d</string>
-    <string name="rocketsListDisplay">Required rockets: %s</string>
-    <string name="rocketsMassDisplay">Mass: %d</string>
+    <string name="difficulty_display">Diff. %d</string>
+    <string name="payload_display">Payload: %d</string>
+    <string name="rockets_list_display">Required rockets: %s</string>
+    <string name="rockets_mass_display">Mass: %d</string>
+
+    <!-- long formatted text -->
+    <string name="about_text"><big><bold>CarnoSpace Mission Planner</bold></big>\n
+        \n
+        Utility application for Leaving Earth; mission planning made easy!\n
+        \n
+        Released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License V3</a>\n
+        \n
+        Application made by <a href="http://www.twitter.com/need2revolt">Need2Revolt</a>\n
+        \n
+        Find source code of this app at:\n
+        <a href="https://github.com/Need2Revolt/LEMP">https://github.com/Need2Revolt/LEMP</a>\n
+        <a href="https://bitbucket.org/Need2Revolt/lemp/">https://bitbucket.org/Need2Revolt/lemp/</a>\n
+        \n
+        All Leaving Earth related stuffs are copyright of <a href="https://www.lumenaris.com/about.html">The Lumenaris Group inc.</a>\n
+        \n
+        \n</string>
+
+    <string name="help_text">
+        
+    </string>
 </resources>

@@ -85,15 +85,15 @@ public class StagesAdapter extends BaseAdapter {
         stageNameText.setText(stage.getStageName());
 
         TextView difficultyText = (TextView) view.findViewById(R.id.difficulty);
-        difficultyText.setText(res.getString(R.string.difficultyDisplay, stage.getDifficulty()));
+        difficultyText.setText(res.getString(R.string.difficulty_display, stage.getDifficulty()));
 
         TextView payloadText = (TextView) view.findViewById(R.id.payloadMass);
-        payloadText.setText(res.getString(R.string.payloadDisplay, stage.getPayloadMass()));
+        payloadText.setText(res.getString(R.string.payload_display, stage.getPayloadMass()));
 
         TextView rocketsListText = (TextView) view.findViewById(R.id.rocketsList);
-        rocketsListText.setText(res.getString(R.string.rocketsListDisplay, stage.getRocktesList().toString()));
+        rocketsListText.setText(res.getString(R.string.rockets_list_display, stage.getRocktesList().toString()));
 
         TextView rocketMassText = (TextView) view.findViewById(R.id.rocketsMass);
-        rocketMassText.setText(res.getString(R.string.rocketsMassDisplay, stage.getRocketsMass()));
+        rocketMassText.setText(res.getString(R.string.rockets_mass_display, stage.getRocketsMass()));
     }
 }

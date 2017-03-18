@@ -11,13 +11,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="net.octopusstudios.carnospace.cmp.activity.MissionsListerActivity"
-            android:label="@string/missionList"
+            android:label="@string/mission_list"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name="net.octopusstudios.carnospace.cmp.activity.MissionDetailsActivity"
-            android:label="@string/missionDetails"
+            android:label="@string/mission_details"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
