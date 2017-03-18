@@ -58,7 +58,10 @@
         \n\n
         If you decide to abort a mission, long tap on it and a menu will popup allowing you to delete it.
         Deletion is not recoverable, so think twice if you want to have a log of all your mission during
-        several games.
+        several games.\n
+        Deleting single stages on the other hand is risky, the functionality is there only to allow you
+        to delete the very last stage. If you made a mistake on a prior stage, then the suggested
+        flow is to delete the entire mission and start over.
         \n\n
         Where are ion thrusters? well, they\'re not here yet, maybe coming in a next release...\n
         And the expansion stuff? well, i don\'t own the expansion, so i have no idea what\'s in there

@@ -11,14 +11,20 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import net.octopusstudios.carnospace.cmp.R;
 import net.octopusstudios.carnospace.cmp.adapter.StagesAdapter;
 import net.octopusstudios.carnospace.cmp.listener.AddStageListener;
+import net.octopusstudios.carnospace.cmp.pojo.DaoSession;
 import net.octopusstudios.carnospace.cmp.pojo.Mission;
+import net.octopusstudios.carnospace.cmp.pojo.Stage;
 import net.octopusstudios.carnospace.cmp.status.SharedState;
 
 /**
@@ -28,6 +34,7 @@ public class MissionDetailsActivity extends AbstractMissionPlannerMenuAwareActiv
 
     private StagesAdapter stagesAdapter;
     private Mission mission;
+    private DaoSession daoSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +45,7 @@ public class MissionDetailsActivity extends AbstractMissionPlannerMenuAwareActiv
 
         SharedState sharedState = (SharedState) getApplicationContext();
         mission = sharedState.getSelectedMission();
-        //mission.setMissionStages(sharedState.getDaoSession().getStageDao().loadAll());
+        daoSession = sharedState.getDaoSession();
 
         final Context ctx = this;
 
@@ -48,9 +55,38 @@ public class MissionDetailsActivity extends AbstractMissionPlannerMenuAwareActiv
         stagesList.setAdapter(stagesAdapter);
         stagesAdapter.notifyDataSetChanged();
 
+        registerForContextMenu(stagesList);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         AddStageListener addStageListener = new AddStageListener(stagesAdapter, mission, ctx);
         fab.setOnClickListener(addStageListener);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId()==R.id.missionsListView) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.mission_details_menu, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+
+            case R.id.delete_stage:
+                Stage toDelete = mission.getMissionStages().remove(info.position);
+
+                daoSession.delete(toDelete);
+                stagesAdapter.notifyDataSetChanged();
+                //TODO stage mass and rockets recalculation logic?
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override
