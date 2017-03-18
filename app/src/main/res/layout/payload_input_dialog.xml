@@ -33,10 +33,14 @@
         tools:text="Maneuver Difficulty:"
         android:contentDescription="Maneuver Difficulty:" />
 
-    <NumberPicker
+    <EditText
+        android:id="@+id/difficultyNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/maneuverDifficultyPicker" />
+        android:ems="10"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
 
     <TextView
         android:text="Payload Mass:"
@@ -47,9 +51,11 @@
         tools:text="Payload Mass:"
         android:contentDescription="Payload Mass:" />
 
-    <NumberPicker
+    <EditText
+        android:id="@+id/payloadNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/payloadMassPicker" />
+        android:ems="10"
+        android:inputType="number" />
 
 </LinearLayout>

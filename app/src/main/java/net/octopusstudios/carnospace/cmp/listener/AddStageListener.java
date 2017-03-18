@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import net.octopusstudios.carnospace.cmp.R;
@@ -39,17 +38,14 @@ public class AddStageListener  implements View.OnClickListener {
         LayoutInflater li = LayoutInflater.from(ctx);
         View stageInputView = li.inflate(R.layout.payload_input_dialog, null);
         final TextView stageNameEdit = (TextView) stageInputView.findViewById(R.id.payloadNameText);
-        final NumberPicker maneuverDifficultyPicker = (NumberPicker)stageInputView.findViewById(R.id.maneuverDifficultyPicker);
-        maneuverDifficultyPicker.setMinValue(0);
-        maneuverDifficultyPicker.setMaxValue(9); //TODO put this in a constant or something
-        final NumberPicker payloadMassPicker = (NumberPicker)stageInputView.findViewById(R.id.payloadMassPicker);
-        payloadMassPicker.setMinValue(0);
-        payloadMassPicker.setMaxValue(20); //TODO put this in a constant or something
+        final TextView maneuverDifficultyPicker = (TextView)stageInputView.findViewById(R.id.difficultyNumber);
+        final TextView payloadMassPicker = (TextView)stageInputView.findViewById(R.id.payloadNumber);
+
         //auto fill payload with previous stage total mass
         if(mission.getMissionStages().size() > 0)
         {
             Stage previousStage = mission.getMissionStages().get(mission.getMissionStages().size() - 1);
-            payloadMassPicker.setValue(previousStage.getTotalMass());
+            payloadMassPicker.setText(String.valueOf(previousStage.getTotalMass()));
         }
 
         AlertDialog.Builder inputDialogBuilder = new AlertDialog.Builder(ctx);
@@ -64,8 +60,8 @@ public class AddStageListener  implements View.OnClickListener {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 buildNewStage(stageNameEdit.getText().toString(),
-                                        maneuverDifficultyPicker.getValue(),
-                                        payloadMassPicker.getValue());
+                                        maneuverDifficultyPicker.getText().toString(),
+                                        payloadMassPicker.getText().toString());
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -82,8 +78,10 @@ public class AddStageListener  implements View.OnClickListener {
         inputDialog.show();
     }
 
-    private void buildNewStage(String stageName, int difficulty, int payload) {
-        Stage s = new Stage(stageName, difficulty, payload);
+    private void buildNewStage(String stageName, String difficulty, String payload) {
+        int difficultyInt = Integer.parseInt(difficulty);
+        int payloadInt = Integer.parseInt(payload);
+        Stage s = new Stage(stageName, difficultyInt, payloadInt);
         s.setMissionId(mission.getId());
         mission.addStageCost(s.getTotalCost());
         mission.getMissionStages().add(s);
