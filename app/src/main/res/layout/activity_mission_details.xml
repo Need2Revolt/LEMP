@@ -31,7 +31,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:tint="@color/colorPrimaryDark"
         app:fabSize="normal"
-        android:scaleType="center"
-        app:srcCompat="@drawable/new_stage" />
+        app:srcCompat="@drawable/new_stage_2" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -23,21 +23,44 @@
         <a href="https://github.com/Need2Revolt/LEMP">https://github.com/Need2Revolt/LEMP</a>\n
         <a href="https://bitbucket.org/Need2Revolt/lemp/">https://bitbucket.org/Need2Revolt/lemp/</a>\n
         \nAll Leaving Earth related stuffs are copyright of <a href="https://www.lumenaris.com/about.html">The Lumenaris Group inc.</a>\n
+        \nFAB icons made by <a href="http://www.flaticon.com/authors/eucalyp">Eucalyp</a>
+        and by <a href="http://www.flaticon.com/authors/smartline">Smartline</a>
+        from <a href="http://www.flaticon.com">www.flaticon.com</a>,  licensed
+        by <a href="http://creativecommons.org/licenses/by/3.0/">CC 3.0 BY</a>
         \n
-        \n</string>
+        \n
+    </string>
 
     <string name="help_text">
-        <big><b>Lost in space?</b></big>\n\n
-        First of all, if you haven\'t read Leaving Earth rulebook, go do it now and then come back
-        here. Basically this application is a digital version of the mission tables illustrated in
-        the rulebook, but with some nice automations to help you.\n
-        As the first thing, you want to create a mission, from <b>\"Command Center\"</b> view
-        using the floating button. Then choose a mission name, it can either be something that reminds
+        <big><b>Lost in space?</b></big>
+        \n\n
+        <b>Remember, this is still beta stuff</b>
+        \n\n
+        If you haven\'t read Leaving Earth rulebook, go do it now and then come back here. This application is a digital
+        version of the mission tables from the rulebook, with some automations.
+        \n\n
+        As the first thing, create a mission from <b>\"Command Center\"</b> view
+        using the floating button. Then choose a mission name, it can either be something that reminds you
         what the goal is, like <b>\"Man to Moon\"</b> or some fancy and secret name if you fear other space
         agencies espionage, like <b>\"Seeliger Effect\"</b>. You\'ll see some information about the mission,
-        the most important one is the total cost that will be auto-calculated for you.\n
+        the most important one is the total cost that will be auto-calculated for you.
+        \n\n
         Now the next step is to add mission stages, just like the rulebook explains, in reverse order.
-        This will make mission planning easier.
+        Tap on a mission and the <b>\"Mission control\"</b> view will open. Click on the floating
+        button to add a stage of your spacecraft. The first stage that you add will be the last one that
+        you\'ll use. Give a name to the stage like <b>\"Moon lander\"</b>, or a description with
+        all the necessary pieces you need, like <b>\"Moon lander: eagle capsule, Aldrin, 2x supply, take sample\"</b>.
+        Total mass for the next stage will be auto-calculated, so from now on just enter the difficulty.
+        Keep adding all the stages required until you reach the launch of your mission.
+        \n\n
+        At this point you\'ll have the optimal combination of rockets for each stage/maneuver in the current list.
+        If you go back to Command Center, you\'ll also have a total cost for the mission.
+        \n\n
+        If you decide to abort a mission, long tap on it and a menu will popup allowing you to delete it.
+        Deletion is not recoverable, so think twice if you want to have a log of all your mission during
+        several games.
+        \n\n
+        That\'s it!
 
     </string>
 </resources>
