@@ -198,13 +198,27 @@ public class Stage implements Serializable {
         float newMassCandidate = basicMass;
         int newCostCandidate = basicCost;
         List<String> newRocketsCandidate = new ArrayList<>(4);
-        while(--i >= 0 && payloadMassCopy > 0) {
+        while(--i >= 0 && payloadMassCopy > 0 && difficultyList.get(i) > 0) {
             //payload/prior trust * mass) + (payload%prior.trust)/prior.prior.trust * mass) + etc...
             int times = (int)(payloadMassCopy/difficultyList.get(i));
             if(payloadMassCopy < difficultyList.get(i)) {
                 times = 1;
             }
             int stageMass = times * massList[i];
+            //check if there will be a very small leftover payload and lighter rockets can't lift it
+            //in case, add one of the current rockets
+            double provisionalPayloadMassCopy = payloadMassCopy;
+            if(stageMass >= massList[i+1]) {
+                provisionalPayloadMassCopy -= difficultyList.get(i+1);
+            }
+            else {
+                provisionalPayloadMassCopy -= times * difficultyList.get(i);
+            }
+
+            if(provisionalPayloadMassCopy > 0 && i > 0 && difficultyList.get(i - 1) <= 0) {
+                stageMass += massList[i];
+                times++;
+            }
             //if the total mass of the smaller rockets is bigger than the next heavier rocket,
             //better use the heavier then...
             if(stageMass >= massList[i+1]) {
