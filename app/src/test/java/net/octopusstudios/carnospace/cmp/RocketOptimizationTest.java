@@ -231,4 +231,17 @@ public class RocketOptimizationTest {
         assertNotNull(stage);
         assertEquals(expectedResult, stage.getRocktesList());
     }
+
+    @Test
+    public void firstBugOnFieldTesting() {
+        //expected result
+        List<String> expectedResult = new ArrayList<>(2);
+        expectedResult.add(Stage.rocketNamesList[2]);
+        expectedResult.add(Stage.rocketNamesList[2]);
+
+        //test logic
+        Stage stage = new Stage("firstBug", 5, 10);
+        assertNotNull(stage);
+        assertEquals(expectedResult, stage.getRocktesList());
+    }
 }
