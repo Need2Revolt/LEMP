@@ -122,15 +122,21 @@ public class AddStageListener  implements View.OnClickListener {
                                     return;
                                 }
 
+                                CharSequence stageNameUser = stageNameEdit.getText();
                                 //if everything is alright, build the stage(s)
                                 if(steps == 1) {
-                                    buildNewStage(stageNameEdit.getText().toString(), diffInts[0], payloadInt);
+                                    buildNewStage(stageNameUser.toString(), diffInts[0], payloadInt);
                                 }
                                 else {
                                     for (int i = 0; i < steps; i++) {
                                         String stageName = "Intermediate stage #" + i;
                                         if(i == 0) {
-                                            stageName = "Actual payload / Final stage";
+                                            if(TextUtils.isEmpty(stageNameUser)) {
+                                                stageName = "Actual payload / Final stage";
+                                            }
+                                            else {
+                                                stageName = stageNameUser.toString();
+                                            }
                                         }
                                         if(i == steps - 1) {
                                             stageName = "Launch / Initial stage";
