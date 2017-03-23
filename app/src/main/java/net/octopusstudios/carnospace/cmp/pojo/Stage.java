@@ -164,7 +164,7 @@ public class Stage implements Serializable {
         }
 
         //if total mass < previous total mass then new minimum candidate.
-        if(newMassCandidate != 0 && newMassCandidate < mass) {
+        if(newMassCandidate != 0 && newMassCandidate < mass && payloadMassCopy < 1) { // < 1 is for decimal rounding
             mass = newMassCandidate;
             rockets = newRocketsCandidate;
             rockets.addAll(basicRockets);
