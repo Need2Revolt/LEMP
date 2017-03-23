@@ -15,41 +15,57 @@
         tools:text="Stage Name:"
         android:contentDescription="Stage Name:" />
 
-    <EditText
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
+        android:contentDescription="(with a list of things to remember to bring)"
+        android:text="(or a list of things to remember to bring)"
+        tools:text="(or a list of things to remember to bring)" />
+
+    <EditText
         android:id="@+id/payloadNameText"
-        android:singleLine="true"
-        android:selectAllOnFocus="true" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textCapSentences"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
 
     <TextView
-        android:text="Maneuver Difficulty:"
+        android:id="@+id/maneuverDifficultyLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/maneuverDifficultyLabel"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:text="Maneuver Difficulty:"
-        android:contentDescription="Maneuver Difficulty:" />
+        android:contentDescription="Maneuver(s) Difficulty (coma separated):"
+        android:text="Maneuver(s) Difficulty:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:text="Maneuver(s) Difficulty:" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="(coma separated)"
+        android:text="(coma separated)"
+        tools:text="(coma separated)" />
 
     <EditText
         android:id="@+id/difficultyNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="text|number"
         android:selectAllOnFocus="true"
         android:singleLine="true" />
 
     <TextView
-        android:text="Payload Mass:"
+        android:id="@+id/payloadMassLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/payloadMassLabel"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:text="Payload Mass:"
-        android:contentDescription="Payload Mass:" />
+        android:contentDescription="Payload Mass:"
+        android:text="Payload Mass:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:text="Payload Mass:" />
 
     <EditText
         android:id="@+id/payloadNumber"

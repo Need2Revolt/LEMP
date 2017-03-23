@@ -66,25 +66,45 @@ public class AddStageListener  implements View.OnClickListener {
                             public void onClick(DialogInterface dialog, int id) {
                                 //checks on difficulty
                                 CharSequence diffString = maneuverDifficultyPicker.getText();
-                                Integer diffInt;
+                                Integer[] diffInts;
+                                String[] diffStringArray;
+                                int steps = 0;
                                 if(TextUtils.isEmpty(diffString)) {
                                     openSnackbar("difficulty is empty");
                                     return;
                                 }
-                                try{
-                                    diffInt = Integer.parseInt(diffString.toString());
+
+                                if(diffString.toString().contains(",")) {
+                                    diffStringArray = diffString.toString().split(",");
+                                    for(int i = 0; i < diffStringArray.length; i++) {
+                                        diffStringArray[i] = diffStringArray[i].trim();
+                                    }
+                                    steps = diffStringArray.length;
                                 }
-                                catch (NumberFormatException e) {
-                                    openSnackbar("difficulty is not a number");
-                                    return;
+                                else {
+                                    steps = 1;
+                                    diffStringArray = new String[1];
+                                    diffStringArray[0] = diffString.toString();
                                 }
-                                if(diffInt < 1) {
-                                    openSnackbar("difficulty should be at least 1");
-                                    return;
-                                }
-                                if(diffInt > 9) {
-                                    openSnackbar("difficulty should be no more than 9");
-                                    return;
+
+                                diffInts = new Integer[steps];
+                                for(int i = 0; i < steps; i++) {
+                                    Integer diffInt;
+                                    try {
+                                        diffInt = Integer.parseInt(diffStringArray[i]);
+                                        diffInts[i] = diffInt;
+                                    } catch (NumberFormatException e) {
+                                        openSnackbar("difficulty is not a number");
+                                        return;
+                                    }
+                                    if (diffInt < 1) {
+                                        openSnackbar("difficulty should be at least 1");
+                                        return;
+                                    }
+                                    if (diffInt > 9) {
+                                        openSnackbar("difficulty should be no more than 9");
+                                        return;
+                                    }
                                 }
 
                                 //checks on payload
@@ -102,8 +122,24 @@ public class AddStageListener  implements View.OnClickListener {
                                     return;
                                 }
 
-                                //if everything is alright, build the stage
-                                buildNewStage(stageNameEdit.getText().toString(), diffInt, payloadInt);
+                                //if everything is alright, build the stage(s)
+                                if(steps == 1) {
+                                    buildNewStage(stageNameEdit.getText().toString(), diffInts[0], payloadInt);
+                                }
+                                else {
+                                    for (int i = 0; i < steps; i++) {
+                                        String stageName = "Intermediate stage #" + i;
+                                        if(i == 0) {
+                                            stageName = "Actual payload / Final stage";
+                                        }
+                                        if(i == steps - 1) {
+                                            stageName = "Launch / Initial stage";
+                                        }
+
+                                        Stage currentStage = buildNewStage(stageName, diffInts[i], payloadInt);
+                                        payloadInt += currentStage.getRocketsMass();
+                                    }
+                                }
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -126,7 +162,7 @@ public class AddStageListener  implements View.OnClickListener {
         snackbar.show();
     }
 
-    private void buildNewStage(String stageName, Integer difficulty, Integer payload) {
+    private Stage buildNewStage(String stageName, Integer difficulty, Integer payload) {
         Stage s = new Stage(stageName, difficulty, payload);
         s.setMissionId(mission.getId());
         mission.addStageCost(s.getTotalCost());
@@ -134,5 +170,7 @@ public class AddStageListener  implements View.OnClickListener {
         daoSession.insertOrReplace(s);
         daoSession.insertOrReplace(mission);
         stagesAdapter.notifyDataSetChanged();
+
+        return s;
     }
 }
