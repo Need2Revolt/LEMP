@@ -78,6 +78,15 @@ public class AddStageListener  implements View.OnClickListener {
                                     openSnackbar("difficulty is not a number");
                                     return;
                                 }
+                                if(diffInt < 1) {
+                                    openSnackbar("difficulty should be at least 1");
+                                    return;
+                                }
+                                if(diffInt > 9) {
+                                    openSnackbar("difficulty should be no more than 9");
+                                    return;
+                                }
+
                                 //checks on payload
                                 CharSequence payloadString = payloadMassPicker.getText();
                                 Integer payloadInt;
@@ -94,9 +103,7 @@ public class AddStageListener  implements View.OnClickListener {
                                 }
 
                                 //if everything is alright, build the stage
-                                buildNewStage(stageNameEdit.getText().toString(),
-                                        diffInt,
-                                        payloadInt);
+                                buildNewStage(stageNameEdit.getText().toString(), diffInt, payloadInt);
                             }
                         })
                 .setNegativeButton("Cancel",
