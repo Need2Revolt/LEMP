@@ -19,44 +19,51 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Difficulty"
+            android:id="@+id/difficulty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/difficulty"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Difficulty"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:text="Payload Mass"
+            android:id="@+id/payloadMass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/payloadMass"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Payload Mass"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <TextView
-            android:text="Rockets List"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/rocketsList"
-            android:layout_weight="0.3" />
-
-        <TextView
-            android:text="Rockets Mass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Rockets List" />
+
+        <TextView
             android:id="@+id/rocketsMass"
-            android:layout_weight="0.7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:maxLines="1" />
+            android:layout_weight="0.7"
+            android:maxLines="1"
+            android:text="Rockets Mass" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/leftoverPayload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TextView" />
 
 </LinearLayout>

@@ -95,5 +95,8 @@ public class StagesAdapter extends BaseAdapter {
 
         TextView rocketMassText = (TextView) view.findViewById(R.id.rocketsMass);
         rocketMassText.setText(res.getString(R.string.rockets_mass_display, stage.getRocketsMass()));
+
+        TextView leftoverPayloadText = (TextView) view.findViewById(R.id.leftoverPayload);
+        leftoverPayloadText.setText(res.getString(R.string.rockets_leftover_display, stage.getRocketsMass()));
     }
 }
