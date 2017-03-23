@@ -13,7 +13,7 @@
     <string name="payload_display"><b>Payload: %d</b></string>
     <string name="rockets_list_display">Required rockets: %s</string>
     <string name="rockets_mass_display">Mass: %d</string>
-    <string name="rockets_leftover_display">Leftover playload mass on this stage: %d</string>
+    <string name="rockets_leftover_display">Leftover playload mass: %.2f</string>
     <string name="mission_date_display">Planned on %s</string>
     <string name="mission_cost_display">Total cost: %dM$</string>
     <string name="mission_years_display">(%d years of funding)</string>

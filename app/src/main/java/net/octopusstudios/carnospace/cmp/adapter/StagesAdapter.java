@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import net.octopusstudios.carnospace.cmp.R;
+import net.octopusstudios.carnospace.cmp.pojo.Rocket;
 import net.octopusstudios.carnospace.cmp.pojo.Stage;
 
 import java.util.ArrayList;
@@ -97,6 +98,14 @@ public class StagesAdapter extends BaseAdapter {
         rocketMassText.setText(res.getString(R.string.rockets_mass_display, stage.getRocketsMass()));
 
         TextView leftoverPayloadText = (TextView) view.findViewById(R.id.leftoverPayload);
-        leftoverPayloadText.setText(res.getString(R.string.rockets_leftover_display, stage.getRocketsMass()));
+        double leftoverPayload = 0;
+        double maxPayload = 0;
+        int difficulty = stage.getDifficulty();
+        for(String rocket : stage.getRocketsList()) {
+            Rocket r = Rocket.valueOf(rocket.toUpperCase());
+            maxPayload += r.getThrustPerDifficulty(difficulty);
+        }
+        leftoverPayload = maxPayload - stage.getPayloadMass();
+        leftoverPayloadText.setText(res.getString(R.string.rockets_leftover_display, leftoverPayload));
     }
 }
