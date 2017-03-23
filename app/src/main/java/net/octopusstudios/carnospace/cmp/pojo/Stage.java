@@ -15,9 +15,8 @@ import org.greenrobot.greendao.annotation.Transient;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 
@@ -30,79 +29,7 @@ public class Stage implements Serializable {
     static final long serialVersionUID = 4639812939L;
 
     @Transient
-    public static final int[] massList = {1, 4, 9, 20};
-    @Transient
-    public static final int[] costList = {1, 5, 8, 15};
-    @Transient
-    public static final String[] rocketNamesList = {"Juno", "Atlas", "Soyuz", "Saturn"};
-    @Transient
-    public static final Map<Integer, List<Double>> difficultiesMap = new HashMap<>();
-
-    //TODO remove this abort from here...
-    static {
-        List<Double> diff1 = new ArrayList<>(4);
-        diff1.add(3d);
-        diff1.add(23d);
-        diff1.add(71d);
-        diff1.add(180d);
-        difficultiesMap.put(1, diff1);
-
-        List<Double> diff2 = new ArrayList<>(4);
-        diff2.add(1d);
-        diff2.add(9.5d);
-        diff2.add(31d);
-        diff2.add(80d);
-        difficultiesMap.put(2, diff2);
-
-        List<Double> diff3 = new ArrayList<>(4);
-        diff3.add(0.33d);
-        diff3.add(5d);
-        diff3.add(17.66d);
-        diff3.add(46.66d);
-        difficultiesMap.put(3, diff3);
-
-        List<Double> diff4 = new ArrayList<>(4);
-        diff4.add(0d);
-        diff4.add(2.75d);
-        diff4.add(11d);
-        diff4.add(30d);
-        difficultiesMap.put(4, diff4);
-
-        List<Double> diff5 = new ArrayList<>(4);
-        diff5.add(0d);
-        diff5.add(1.4d);
-        diff5.add(7d);
-        diff5.add(20d);
-        difficultiesMap.put(5, diff5);
-
-        List<Double> diff6 = new ArrayList<>(4);
-        diff6.add(0d);
-        diff6.add(0.5d);
-        diff6.add(4.33d);
-        diff6.add(13.33d);
-        difficultiesMap.put(6, diff6);
-
-        List<Double> diff7 = new ArrayList<>(4);
-        diff7.add(0d);
-        diff7.add(0d);
-        diff7.add(2.29d);
-        diff7.add(8.57d);
-        difficultiesMap.put(7, diff7);
-
-        List<Double> diff8 = new ArrayList<>(4);
-        diff8.add(0d);
-        diff8.add(0d);
-        diff8.add(1d);
-        diff8.add(5d);
-        difficultiesMap.put(8, diff8);
-
-        List<Double> diff9 = new ArrayList<>(4);
-        diff9.add(0d);
-        diff9.add(0d);
-        diff9.add(1d);
-        diff9.add(5d);
-        difficultiesMap.put(9, diff9);
-    }
+    public static final Rocket[] rocketList = {Rocket.JUNO, Rocket.ATLAS, Rocket.SOYUZ, Rocket.SATURN};
 
     @Id private Long id;
     private Long missionId;
@@ -110,7 +37,7 @@ public class Stage implements Serializable {
     private int difficulty;
     private int payloadMass;
     @Convert(converter = StringListConverter.class, columnType = String.class)
-    private List<String> rocktesList;
+    private List<String> rocketsList;
     private int rocketsMass;
     private int totalCost;
     @ToOne(joinProperty = "missionId")
@@ -131,14 +58,14 @@ public class Stage implements Serializable {
         difficulty = 0;
         payloadMass = 0;
         rocketsMass = 0;
-        rocktesList = new ArrayList<>(2);
+        rocketsList = new ArrayList<>(2);
     }
 
-    public Stage(String stageName, int difficulty, int payloadMass, List<String> rocktesList, int rocketsMass) {
+    public Stage(String stageName, int difficulty, int payloadMass, List<String> rocketsList, int rocketsMass) {
         this.stageName = stageName;
         this.difficulty = difficulty;
         this.payloadMass = payloadMass;
-        this.rocktesList = rocktesList;
+        this.rocketsList = rocketsList;
         this.rocketsMass = rocketsMass;
     }
 
@@ -149,23 +76,21 @@ public class Stage implements Serializable {
         calculateRequiredRockets();
     }
 
-    @Generated(hash = 1136843038)
-    public Stage(Long id, Long missionId, String stageName, int difficulty, int payloadMass,
-            List<String> rocktesList, int rocketsMass, int totalCost) {
+    @Generated(hash = 493360797)
+    public Stage(Long id, Long missionId, String stageName, int difficulty, int payloadMass, List<String> rocketsList,
+            int rocketsMass, int totalCost) {
         this.id = id;
         this.missionId = missionId;
         this.stageName = stageName;
         this.difficulty = difficulty;
         this.payloadMass = payloadMass;
-        this.rocktesList = rocktesList;
+        this.rocketsList = rocketsList;
         this.rocketsMass = rocketsMass;
         this.totalCost = totalCost;
     }
 
     private void calculateRequiredRockets() {
         //find the relevant table row using the difficulty
-        List<Double> difficultyList = difficultiesMap.get(difficulty);
-
         //scan the row until payload > rocket trust
         float mass = 0;
         int stageCost = 0;
@@ -175,66 +100,66 @@ public class Stage implements Serializable {
         float basicMass = 0;
         int basicCost = 0;
         List<String> basicRockets = new ArrayList<>(2);
-        while(payloadMassCopy > difficultyList.get(i)) {
+        while(payloadMassCopy > rocketList[i].getThrustPerDifficulty(difficulty)) {
             if(i < 3) {
                 i++;
             }
             else {
-                basicMass += massList[i];
-                basicCost += costList[i];
-                basicRockets.add(rocketNamesList[i]);
-                payloadMassCopy -= difficultyList.get(i);
+                basicMass += rocketList[i].getMass();
+                basicCost += rocketList[i].getCost();
+                basicRockets.add(rocketList[i].getName());
+                payloadMassCopy -= rocketList[i].getThrustPerDifficulty(difficulty);
                 i=0;
             }
         }
 
         //save the rocket as candidate and note it's mass
-        mass = basicMass + massList[i];
-        stageCost = basicCost + costList[i];
+        mass = basicMass + rocketList[i].getMass();
+        stageCost = basicCost + rocketList[i].getCost();
         rockets.addAll(basicRockets);
-        rockets.add(rocketNamesList[i]);
+        rockets.add(rocketList[i].getName());
 
         //scan lighter rockets
         float newMassCandidate = basicMass;
         int newCostCandidate = basicCost;
         List<String> newRocketsCandidate = new ArrayList<>(4);
-        while(--i >= 0 && payloadMassCopy > 0 && difficultyList.get(i) > 0) {
+        while(--i >= 0 && payloadMassCopy > 0 && rocketList[i].getThrustPerDifficulty(difficulty) > 0) {
             //payload/prior trust * mass) + (payload%prior.trust)/prior.prior.trust * mass) + etc...
-            int times = (int)(payloadMassCopy/difficultyList.get(i));
-            if(payloadMassCopy < difficultyList.get(i)) {
+            int times = (int)(payloadMassCopy/rocketList[i].getThrustPerDifficulty(difficulty));
+            if(payloadMassCopy < rocketList[i].getThrustPerDifficulty(difficulty)) {
                 times = 1;
             }
-            int stageMass = times * massList[i];
+            int stageMass = times * rocketList[i].getMass();
             //check if there will be a very small leftover payload and lighter rockets can't lift it
             //in case, add one of the current rockets
             double provisionalPayloadMassCopy = payloadMassCopy;
-            if(stageMass >= massList[i+1]) {
-                provisionalPayloadMassCopy -= difficultyList.get(i+1);
+            if(stageMass >= rocketList[i+1].getMass()) {
+                provisionalPayloadMassCopy -= rocketList[i+1].getThrustPerDifficulty(difficulty);
             }
             else {
-                provisionalPayloadMassCopy -= times * difficultyList.get(i);
+                provisionalPayloadMassCopy -= times * rocketList[i].getThrustPerDifficulty(difficulty);
             }
 
-            if(provisionalPayloadMassCopy > 0 && i > 0 && difficultyList.get(i - 1) <= 0) {
-                stageMass += massList[i];
+            if(provisionalPayloadMassCopy > 0 && i > 0 && rocketList[i-1].getThrustPerDifficulty(difficulty) <= 0) {
+                stageMass += rocketList[i].getMass();
                 times++;
             }
             //if the total mass of the smaller rockets is bigger than the next heavier rocket,
             //better use the heavier then...
-            if(stageMass >= massList[i+1]) {
-                newMassCandidate += massList[i+1];
-                newCostCandidate += costList[i+1];
-                newRocketsCandidate.add(rocketNamesList[i+1]);
-                payloadMassCopy -= difficultyList.get(i+1);
+            if(stageMass >= rocketList[i+1].getMass()) {
+                newMassCandidate += rocketList[i+1].getMass();
+                newCostCandidate += rocketList[i+1].getCost();
+                newRocketsCandidate.add(rocketList[i+1].getName());
+                payloadMassCopy -= rocketList[i+1].getThrustPerDifficulty(difficulty);
             }
             //otherwise the smaller ones are the best choice
             else {
-                newMassCandidate += times * massList[i];
-                newCostCandidate += times * costList[i];
+                newMassCandidate += times * rocketList[i].getMass();
+                newCostCandidate += times * rocketList[i].getCost();
                 for (int j = 0; j < times; j++) {
-                    newRocketsCandidate.add(rocketNamesList[i]);
+                    newRocketsCandidate.add(rocketList[i].getName());
                 }
-                payloadMassCopy -= times * difficultyList.get(i);
+                payloadMassCopy -= times * rocketList[i].getThrustPerDifficulty(difficulty);
             }
         }
 
@@ -248,7 +173,7 @@ public class Stage implements Serializable {
 
         //set calculated values
         rocketsMass = (int)mass;
-        rocktesList = rockets;
+        rocketsList = rockets;
         totalCost = stageCost;
     }
 
@@ -276,12 +201,12 @@ public class Stage implements Serializable {
         this.payloadMass = payloadMass;
     }
 
-    public List<String> getRocktesList() {
-        return rocktesList;
+    public List<String> getRocketsList() {
+        return rocketsList;
     }
 
-    public void setRocktesList(List<String> rocktesList) {
-        this.rocktesList = rocktesList;
+    public void setRocketsList(List<String> rocketsList) {
+        this.rocketsList = rocketsList;
     }
 
     public int getRocketsMass() {
