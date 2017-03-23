@@ -112,9 +112,11 @@ public class Mission implements Serializable {
         this.missionStages = missionStages;
     }
 
-    public void addStageCost(int stageCose) {
-        totalCost += stageCose;
+    public void addStageCost(int stageCost) {
+        totalCost += stageCost;
     }
+
+    public void removeStageCost(int stageCost) { totalCost -= stageCost; }
 
     public Long getId() {
         return this.id;

@@ -78,8 +78,9 @@ public class MissionDetailsActivity extends AbstractMissionPlannerMenuAwareActiv
 
             case R.id.delete_stage:
                 Stage toDelete = mission.getMissionStages().remove(info.position);
-
+                mission.removeStageCost(toDelete.getTotalCost());
                 daoSession.delete(toDelete);
+                daoSession.insertOrReplace(mission);
                 stagesAdapter.notifyDataSetChanged();
                 //TODO stage mass and rockets recalculation logic?
                 return true;
