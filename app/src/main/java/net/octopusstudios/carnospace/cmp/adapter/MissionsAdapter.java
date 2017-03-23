@@ -6,6 +6,7 @@
 package net.octopusstudios.carnospace.cmp.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ import java.util.List;
 public class MissionsAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-
+    private Resources res;
     private List<Mission> missions;
 
     public MissionsAdapter(Context context) {
@@ -34,6 +35,7 @@ public class MissionsAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         missions = new ArrayList<Mission>(0);
+        res = context.getResources();
     }
 
     public MissionsAdapter(Context context, List<Mission> missions) {
@@ -41,6 +43,7 @@ public class MissionsAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.missions = missions;
+        res = context.getResources();
     }
 
     @Override
@@ -79,12 +82,18 @@ public class MissionsAdapter extends BaseAdapter {
         missionNameText.setText(missions.get(i).getName());
 
         TextView totalCostText = (TextView) view.findViewById(R.id.detailTotalCostText);
-        totalCostText.setText("Total Cost " + missions.get(i).getTotalCost());
+        totalCostText.setText(res.getString(R.string.mission_cost_display, missions.get(i).getTotalCost()));
+
+        TextView yearsText = (TextView) view.findViewById(R.id.detailYearsRequired);
+        int years = missions.get(i).getTotalCost()/25;
+        if(missions.get(i).getTotalCost()%25 != 0) {
+            years++;
+        }
+        yearsText.setText(res.getString(R.string.mission_years_display, years));
 
         TextView dateText = (TextView) view.findViewById(R.id.missionDateText);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss z(Z)");
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss");
         String date = sdf.format(missions.get(i).getDate().getTime());
-        dateText.setText(date);
+        dateText.setText(res.getString(R.string.mission_date_display, date));
     }
 }
