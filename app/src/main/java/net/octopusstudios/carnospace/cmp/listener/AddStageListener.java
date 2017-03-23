@@ -3,8 +3,11 @@ package net.octopusstudios.carnospace.cmp.listener;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import net.octopusstudios.carnospace.cmp.R;
@@ -24,11 +27,13 @@ public class AddStageListener  implements View.OnClickListener {
     private Mission mission;
     private Context ctx;
     private DaoSession daoSession;
+    private ListView parentView;
 
-    public AddStageListener(StagesAdapter stagesAdapter, Mission mission, Context ctx) {
+    public AddStageListener(StagesAdapter stagesAdapter, Mission mission, Context ctx, ListView parentView) {
         this.mission = mission;
         this.ctx = ctx;
         this.stagesAdapter = stagesAdapter;
+        this.parentView = parentView;
         daoSession = ((SharedState)ctx.getApplicationContext()).getDaoSession();
     }
 
@@ -59,9 +64,39 @@ public class AddStageListener  implements View.OnClickListener {
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                //checks on difficulty
+                                CharSequence diffString = maneuverDifficultyPicker.getText();
+                                Integer diffInt;
+                                if(TextUtils.isEmpty(diffString)) {
+                                    openSnackbar("difficulty is empty");
+                                    return;
+                                }
+                                try{
+                                    diffInt = Integer.parseInt(diffString.toString());
+                                }
+                                catch (NumberFormatException e) {
+                                    openSnackbar("difficulty is not a number");
+                                    return;
+                                }
+                                //checks on payload
+                                CharSequence payloadString = payloadMassPicker.getText();
+                                Integer payloadInt;
+                                if(TextUtils.isEmpty(payloadString)) {
+                                    openSnackbar("payload is empty");
+                                    return;
+                                }
+                                try{
+                                    payloadInt = Integer.parseInt(payloadString.toString());
+                                }
+                                catch (NumberFormatException e) {
+                                    openSnackbar("payload is not a number");
+                                    return;
+                                }
+
+                                //if everything is alright, build the stage
                                 buildNewStage(stageNameEdit.getText().toString(),
-                                        maneuverDifficultyPicker.getText().toString(),
-                                        payloadMassPicker.getText().toString());
+                                        diffInt,
+                                        payloadInt);
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -78,10 +113,14 @@ public class AddStageListener  implements View.OnClickListener {
         inputDialog.show();
     }
 
-    private void buildNewStage(String stageName, String difficulty, String payload) {
-        int difficultyInt = Integer.parseInt(difficulty);
-        int payloadInt = Integer.parseInt(payload);
-        Stage s = new Stage(stageName, difficultyInt, payloadInt);
+    private void openSnackbar(String cause) {
+        String message = "Cowardly refusing to create stage because " + cause;
+        Snackbar snackbar = Snackbar.make(parentView, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    private void buildNewStage(String stageName, Integer difficulty, Integer payload) {
+        Stage s = new Stage(stageName, difficulty, payload);
         s.setMissionId(mission.getId());
         mission.addStageCost(s.getTotalCost());
         mission.getMissionStages().add(s);

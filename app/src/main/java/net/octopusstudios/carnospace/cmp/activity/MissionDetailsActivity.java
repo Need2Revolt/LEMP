@@ -58,7 +58,7 @@ public class MissionDetailsActivity extends AbstractMissionPlannerMenuAwareActiv
         registerForContextMenu(stagesList);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        AddStageListener addStageListener = new AddStageListener(stagesAdapter, mission, ctx);
+        AddStageListener addStageListener = new AddStageListener(stagesAdapter, mission, ctx, stagesList);
         fab.setOnClickListener(addStageListener);
     }
 
