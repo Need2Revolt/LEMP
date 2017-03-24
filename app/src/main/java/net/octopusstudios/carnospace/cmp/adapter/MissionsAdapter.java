@@ -89,7 +89,12 @@ public class MissionsAdapter extends BaseAdapter {
         if(missions.get(i).getTotalCost()%25 != 0) {
             years++;
         }
-        yearsText.setText(res.getString(R.string.mission_years_display, years));
+        if(years == 1) {
+            yearsText.setText(res.getString(R.string.mission_year_display, years));
+        }
+        else {
+            yearsText.setText(res.getString(R.string.mission_years_display, years));
+        }
 
         TextView dateText = (TextView) view.findViewById(R.id.missionDateText);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss z(Z)");

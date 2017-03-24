@@ -9,7 +9,7 @@
     <string name="close_help">Got it!</string>
 
     <!-- ingame text -->
-    <string name="difficulty_display"><b>Diff. %d</b></string>
+    <string name="difficulty_display"><b>Difficulty: %d</b></string>
     <string name="payload_display"><b>Payload: %d</b></string>
     <string name="rockets_list_display">Required rockets: %s</string>
     <string name="rockets_mass_display">Mass: %d</string>
@@ -17,6 +17,7 @@
     <string name="mission_date_display">Planned on %s</string>
     <string name="mission_cost_display">Total cost: %dM$</string>
     <string name="mission_years_display">(%d years of funding)</string>
+    <string name="mission_year_display">(%d year of funding)</string>
 
     <!-- long formatted text -->
     <string name="about_text"><big><b>CarnoSpace Mission Planner</b></big>\n
@@ -57,18 +58,31 @@
         Total mass for the next stage will be auto-calculated, so from now on just enter the difficulty.
         Keep adding all the stages required until you reach the launch of your mission.
         \n\n
+        If you prefer a quicker way, you can add the payload for the first stage and then instead of
+        specifying the difficulty for that stage, input a list of difficulties, coma separated. For
+        example, something like: <b>5,3,5,1</b> for a Phobos survey mission. The application will
+        auto-generate all the required stages and calculate the rockets and the subsequent payload
+        mass for you.
+        \n\n
+        Be aware that the application is great at finding the optimal combination of rockets for
+        all-in-one missions, where your spaceship is just one and will go from start to finish of the mission.
+        Sometimes though, it\'s best to separate your ship in smaller pieces and dock back together.
+        In this case, it\'s up to you to determine when and where docking and separation are required
+        and you can still use the application to help you. The trick is to split the mission into several
+        "pieces" and treat each "piece" like a stand-alone mission.
+        \n\n
         At this point you\'ll have the optimal combination of rockets for each stage/maneuver in the current list.
         If you go back to Command Center, you\'ll also have a total cost for the mission.
         \n\n
         If you decide to abort a mission, long tap on it and a menu will popup allowing you to delete it.
-        Deletion is not recoverable, so think twice if you want to have a log of all your mission during
+        Deletion is not recoverable, so think twice if you want to have a log of all your missions during
         several games.\n
         Deleting single stages on the other hand is risky, the functionality is there only to allow you
         to delete the very last stage. If you made a mistake on a prior stage, then the suggested
-        flow is to delete the entire mission and start over.
+        flow is to delete the entire mission and start over. Why so? because later stages rockets won\'t be updated.
         \n\n
         Where are ion thrusters? well, they\'re not here yet, maybe coming in a next release...\n
-        And the expansion stuff? well, i don\'t own the expansion, so i have no idea what\'s in there
+        And the expansion stuff? well, i don\'t own the expansion, so i have no idea what\'s in there.
         \n\n
         That\'s it!
 
