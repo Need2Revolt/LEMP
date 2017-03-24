@@ -3,6 +3,7 @@ package net.octopusstudios.carnospace.cmp.listener;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -23,11 +24,13 @@ import net.octopusstudios.carnospace.cmp.status.SharedState;
 
 public class AddStageListener  implements View.OnClickListener {
 
+    public static final String SEPARATOR = ",";
     private StagesAdapter stagesAdapter;
     private Mission mission;
     private Context ctx;
     private DaoSession daoSession;
     private ListView parentView;
+    private Resources res;
 
     public AddStageListener(StagesAdapter stagesAdapter, Mission mission, Context ctx, ListView parentView) {
         this.mission = mission;
@@ -35,6 +38,7 @@ public class AddStageListener  implements View.OnClickListener {
         this.stagesAdapter = stagesAdapter;
         this.parentView = parentView;
         daoSession = ((SharedState)ctx.getApplicationContext()).getDaoSession();
+        res = ctx.getResources();
     }
 
     @Override
@@ -61,7 +65,7 @@ public class AddStageListener  implements View.OnClickListener {
         // set dialog message
         inputDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("OK",
+                .setPositiveButton(R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //checks on difficulty
@@ -70,12 +74,12 @@ public class AddStageListener  implements View.OnClickListener {
                                 String[] diffStringArray;
                                 int steps = 0;
                                 if(TextUtils.isEmpty(diffString)) {
-                                    openSnackbar("difficulty is empty");
+                                    openSnackbar(ctx.getString(R.string.difficulty_empty));
                                     return;
                                 }
 
-                                if(diffString.toString().contains(",")) {
-                                    diffStringArray = diffString.toString().split(",");
+                                if(diffString.toString().contains(SEPARATOR)) {
+                                    diffStringArray = diffString.toString().split(SEPARATOR);
                                     for(int i = 0; i < diffStringArray.length; i++) {
                                         diffStringArray[i] = diffStringArray[i].trim();
                                     }
@@ -94,15 +98,15 @@ public class AddStageListener  implements View.OnClickListener {
                                         diffInt = Integer.parseInt(diffStringArray[i]);
                                         diffInts[i] = diffInt;
                                     } catch (NumberFormatException e) {
-                                        openSnackbar("difficulty is not a number");
+                                        openSnackbar(ctx.getString(R.string.difficulty_not_number));
                                         return;
                                     }
                                     if (diffInt < 1) {
-                                        openSnackbar("difficulty should be at least 1");
+                                        openSnackbar(ctx.getString(R.string.diff_lesser_1));
                                         return;
                                     }
                                     if (diffInt > 9) {
-                                        openSnackbar("difficulty should be no more than 9");
+                                        openSnackbar(ctx.getString(R.string.diff_bigger_9));
                                         return;
                                     }
                                 }
@@ -111,14 +115,14 @@ public class AddStageListener  implements View.OnClickListener {
                                 CharSequence payloadString = payloadMassPicker.getText();
                                 Integer payloadInt;
                                 if(TextUtils.isEmpty(payloadString)) {
-                                    openSnackbar("payload is empty");
+                                    openSnackbar(ctx.getString(R.string.payload_empty));
                                     return;
                                 }
                                 try{
                                     payloadInt = Integer.parseInt(payloadString.toString());
                                 }
                                 catch (NumberFormatException e) {
-                                    openSnackbar("payload is not a number");
+                                    openSnackbar(ctx.getString(R.string.payload_not_number));
                                     return;
                                 }
 
@@ -129,17 +133,17 @@ public class AddStageListener  implements View.OnClickListener {
                                 }
                                 else {
                                     for (int i = 0; i < steps; i++) {
-                                        String stageName = "Intermediate stage #" + i;
+                                        String stageName = res.getString(R.string.intermediate_auto_stage, i);
                                         if(i == 0) {
                                             if(TextUtils.isEmpty(stageNameUser)) {
-                                                stageName = "Actual payload / Final stage";
+                                                stageName = ctx.getString(R.string.first_auto_stage);
                                             }
                                             else {
                                                 stageName = stageNameUser.toString();
                                             }
                                         }
                                         if(i == steps - 1) {
-                                            stageName = "Launch / Initial stage";
+                                            stageName = ctx.getString(R.string.last_auto_stage);
                                         }
 
                                         Stage currentStage = buildNewStage(stageName, diffInts[i], payloadInt);
@@ -148,7 +152,7 @@ public class AddStageListener  implements View.OnClickListener {
                                 }
                             }
                         })
-                .setNegativeButton("Cancel",
+                .setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
@@ -163,7 +167,7 @@ public class AddStageListener  implements View.OnClickListener {
     }
 
     private void openSnackbar(String cause) {
-        String message = "Cowardly refusing to create stage because " + cause;
+        String message = res.getString(R.string.cowardly_refuse_stage, cause);
         Snackbar snackbar = Snackbar.make(parentView, message, Snackbar.LENGTH_LONG);
         snackbar.show();
     }

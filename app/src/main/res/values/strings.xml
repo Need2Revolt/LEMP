@@ -87,4 +87,16 @@
         That\'s it!
 
     </string>
+    <string name="intermediate_auto_stage">Intermediate stage #%d</string>
+    <string name="first_auto_stage">Actual payload / Final stage</string>
+    <string name="last_auto_stage">Launch / Initial stage</string>
+    <string name="cancel">Cancel</string>
+    <string name="cowardly_refuse_stage">Cowardly refusing to create stage because %s</string>
+    <string name="payload_not_number">payload is not a number</string>
+    <string name="payload_empty">payload is empty</string>
+    <string name="diff_bigger_9">difficulty should be no more than 9</string>
+    <string name="diff_lesser_1">difficulty should be at least 1</string>
+    <string name="difficulty_not_number">difficulty is not a number</string>
+    <string name="difficulty_empty">difficulty is empty</string>
+    <string name="ok">OK</string>
 </resources>
